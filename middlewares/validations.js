@@ -5,7 +5,7 @@ const validation = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     let output = {
-        codRsp : 2,
+        codRsp : 400,
         msgRsp : errors.errors[0].msg
     }
     console.log(output)

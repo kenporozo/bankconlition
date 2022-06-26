@@ -10,7 +10,7 @@ const doc = {
         description : "Documentación de los endpoints creados para ser consumidos por el equipo de front-end de Bankconliton"
     },
     host: "localhost:3000",
-    basePath: "/api/v1/bankconlition",
+    basePath: "/api/bankconlition",
     schms: ["http"],
     consumes: ["application/json"],
     produces: ["application/json"],
@@ -18,10 +18,17 @@ const doc = {
         {
             "name" : "Users",
             "description" : "CRUD de usuarios"
+        },
+        {
+            "name" : "Login",
+            "description" : "Autenticación de usuarios del sistema"
         }
     ],
     definitions: {
-
+        RequestLogin :{
+            usuario : "pperes",
+            password : "pperez"
+        }
     }
 }
 

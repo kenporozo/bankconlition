@@ -9,7 +9,7 @@ class Server {
   constructor() {
     this.app = express();
     this.port = process.env.PORT;
-    this.basePath = "/api/v1/bankconlition";
+    this.basePath = "/api/bankconlition";
 
     // Middlewares
     this.middlewares();
@@ -33,6 +33,7 @@ class Server {
   }
 
   routes() {
+    this.app.use(this.basePath, require("../routes/auth"));
     this.app.use(this.basePath, require("../routes/users"));
     this.app.use(
       `${this.basePath}/docs`,
