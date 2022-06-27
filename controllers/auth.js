@@ -42,7 +42,7 @@ const login = (req = request, res = response) => {
         schema: { $ref: "#/definitions/RequestLogin"}
       }
    */
-};
+}
 
 module.exports = {
   login

@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const validateToken = (req = request, res = response, next) =>{
 
     const token = req.header("x-auth-token");
-    console.log(token);
     
     if(!token){
         return res.status(401).json({
@@ -15,8 +14,9 @@ const validateToken = (req = request, res = response, next) =>{
     try {
         
         const payload = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
-        console.log(payload);
-        req.payload = payload;
+        console.log("Payload", payload);
+        req.body.payload = payload;
+        console.log(req.body)
         next()
     } catch (error) {
         console.log(error);
