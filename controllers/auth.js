@@ -15,8 +15,8 @@ const login = (req = request, res = response) => {
         if(error){
           console.log(error);
           return res.status(500).json({
-            codRsp: 500,
-            msgRsp: "Error al crear token, intente más tarde",
+            cod: 500,
+            msg: "Error al crear token, intente más tarde",
           })
         }else{
           return res.json({
@@ -27,8 +27,8 @@ const login = (req = request, res = response) => {
       });
     } else {
       res.status(401).json({
-        codRsp: 401,
-        msgRsp: "Usuario no registrado en el sistema",
+        cod: 401,
+        msg: "Usuario no registrado en el sistema",
       });
     }
   });

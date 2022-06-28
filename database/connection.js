@@ -21,8 +21,8 @@ const getPool = () => {
 const errorResponse = (error, response) => {
   console.log(`--ERROR| ${error} |FIN ERROR--`);
   response.status(ERROR_CODE).send({
-    codRsp: ERROR_CODE,
-    msgRsp: error,
+    cod: ERROR_CODE,
+    msg: error,
   });
 };
 

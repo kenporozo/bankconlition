@@ -7,8 +7,8 @@ const validateToken = (req = request, res = response, next) =>{
     
     if(!token){
         return res.status(401).json({
-            codRsp : 401,
-            msgRsp : "No hay token en la petición"
+            cod : 401,
+            msg : "No hay token en la petición"
         });
     }
     try {
@@ -21,8 +21,8 @@ const validateToken = (req = request, res = response, next) =>{
     } catch (error) {
         console.log(error);
         res.status(401).json({
-            codRsp : 401,
-            msgRsp : "Token no válido" 
+            cod : 401,
+            msg : "Token no válido" 
         })
     }
 }
