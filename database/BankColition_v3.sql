@@ -134,12 +134,14 @@ CREATE TABLE `conciliacionbancaria` (
   KEY `conciliacionbancaria_ibfk_2` (`Id_MovimientoCartola`),
   KEY `conciliacionbancaria_ibfk_4` (`Id_Cartola`),
   KEY `conciliacionbancaria_ibfk_5` (`Id_LibroDiario`),
+  KEY `conciliacionbancaria_ibfk_7_idx` (`Id_Estado`),
   CONSTRAINT `conciliacionbancaria_ibfk_1` FOREIGN KEY (`Id_MovimientoLibroDiario`) REFERENCES `movimientolibrodiario` (`Id`),
   CONSTRAINT `conciliacionbancaria_ibfk_2` FOREIGN KEY (`Id_MovimientoCartola`) REFERENCES `movimientoscartola` (`Id`),
   CONSTRAINT `conciliacionbancaria_ibfk_3` FOREIGN KEY (`Id_CuentaBancaria`) REFERENCES `cuentabancaria` (`Id`),
   CONSTRAINT `conciliacionbancaria_ibfk_4` FOREIGN KEY (`Id_Cartola`) REFERENCES `librodiario` (`Id`),
   CONSTRAINT `conciliacionbancaria_ibfk_5` FOREIGN KEY (`Id_LibroDiario`) REFERENCES `cartola` (`Id`),
-  CONSTRAINT `conciliacionbancaria_ibfk_6` FOREIGN KEY (`Id_Cliente`) REFERENCES `cliente` (`Id`)
+  CONSTRAINT `conciliacionbancaria_ibfk_6` FOREIGN KEY (`Id_Cliente`) REFERENCES `cliente` (`Id`),
+  CONSTRAINT `conciliacionbancaria_ibfk_7` FOREIGN KEY (`Id_Estado`) REFERENCES `estado` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -2233,4 +2235,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-27 21:50:45
+-- Dump completed on 2022-06-27 22:14:53
