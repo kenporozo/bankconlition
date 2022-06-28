@@ -389,6 +389,47 @@ INSERT INTO `tipousuario` VALUES (1,'Administrador'),(2,'Consultor');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `usuario`
+--
+
+DROP TABLE IF EXISTS `usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuario` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `Id_Cliente` int NOT NULL,
+  `Id_TipoUsuario` int NOT NULL,
+  `Usuario` varchar(45) NOT NULL,
+  `Password` varchar(45) NOT NULL,
+  `Rut` varchar(45) NOT NULL,
+  `Nombres` varchar(45) NOT NULL,
+  `Apellidos` varchar(45) NOT NULL,
+  `Correo` varchar(100) NOT NULL,
+  `id_estado` int NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `Usuario_UNIQUE` (`Usuario`),
+  UNIQUE KEY `Rut_UNIQUE` (`Rut`),
+  UNIQUE KEY `Correo_UNIQUE` (`Correo`),
+  KEY `Id_Cliente` (`Id_Cliente`),
+  KEY `Id_TipoUsuario` (`Id_TipoUsuario`),
+  KEY `fk_usuario_estado_idx` (`id_estado`),
+  CONSTRAINT `fk_usuario_estado` FOREIGN KEY (`id_estado`) REFERENCES `estado` (`id`),
+  CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`Id_Cliente`) REFERENCES `cliente` (`Id`),
+  CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`Id_TipoUsuario`) REFERENCES `tipousuario` (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuario`
+--
+
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (1,1,1,'administrador','admin','0-1','Sin Info','Sin Info','Sin Info',1),(2,2,2,'pperez','pperez','1-9','Pedro','Perez','pperez@inacapmail.cl',1),(4,1,2,'userAPI','123abc','9-9','juan','lopez','jlopez@mail.cl',1),(6,1,2,'userAPI2','123abc','8-9','juan','lopez','juan_lopez@mail.cl',1),(7,1,2,'userAPI22','123abc','8-91','juan','lopez','juan_lopez@email.cl',1),(8,1,2,'userAPI221','123abc','8-911','juan','lopez','juan_lopez@gmail.cl',1);
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping events for database 'bankcolition'
 --
 
@@ -2192,4 +2233,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-27 21:45:38
+-- Dump completed on 2022-06-27 21:50:45
