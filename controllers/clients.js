@@ -2,11 +2,11 @@ const { response, request } = require("express");
 const bcryptjs = require("bcryptjs");
 const db = require("../database/connection");
 
-const getUsers = (req = request, res = response) => {
-  let sql = "CALL sp_sel_usuario()";
+const getClients = (req = request, res = response) => {
+  let sql = "CALL sp_sel_cliente()";
   const { rol } = req.body.payload;
   if (rol === "Administrador") {
-    db(sql, res, (result) => res.json({ users: result }));
+    db(sql, res, (result) => res.json({ clients: result }));
   } else {
     return res.status(401).json({
       cod: 401,
@@ -15,14 +15,14 @@ const getUsers = (req = request, res = response) => {
   }
  
   /**
-   * #swagger.tags = ["Users"]
-   * #swagger.description = "Endpoint para obtener una lista con todos los usuarios del sistema"
+   * #swagger.tags = ["Clients"]
+   * #swagger.description = "Endpoint para obtener una lista con todos los clientes del sistema"
    */
 };
 
-const getUserById = (req = request, res = response) => {
+const getClientById = (req = request, res = response) => {
     const { id } = req.params;
-    let sql = `CALL sp_sel_usuario_by_id('${id}')`;
+    let sql = `CALL sp_sel_cliente_by_id('${id}')`;
     const { rol } = req.body.payload;
   
     if (rol === "Administrador") {
@@ -32,7 +32,7 @@ const getUserById = (req = request, res = response) => {
         } else {
           res.status(400).json({
             cod: 400,
-            msg: "El usuario que buscas, no existe",
+            msg: "El cliente que buscas, no existe",
           });
         }
       });
@@ -43,18 +43,17 @@ const getUserById = (req = request, res = response) => {
       });
     }
     /**
-     * #swagger.tags = ["Users"]
-     * #swagger.description = "Endpoint para obtener usuarios por id"
+     * #swagger.tags = ["Clients"]
+     * #swagger.description = "Endpoint para obtener clientes por id"
      * #swagger.parameters['Request'] = {
                   in: 'body',
                   schema: {}
      */
   };
 
-const insertUser = (req = request, res = response) => {
-  const { idCliente, username, password, rut, nombres, apellidos, correo } =
-    req.body;
-  let sql = `CALL sp_ins_usuario('${idCliente}','${username}','${password}','${rut}','${nombres}','${apellidos}','${correo}')`;
+const insertClient = (req = request, res = response) => {
+  const { empresa, rut } = req.body;
+  let sql = `CALL sp_ins_cliente('${empresa}','${rut}')`;
   const { rol } = req.body.payload;
 
   if (rol === "Administrador") {
@@ -75,20 +74,20 @@ const insertUser = (req = request, res = response) => {
     });
   }
   /**
-   * #swagger.tags = ["Users"]
-   * #swagger.description = "Endpoint para crear usuarios del sistema"
+   * #swagger.tags = ["Clients"]
+   * #swagger.description = "Endpoint para crear clientes del sistema"
    * #swagger.parameters['Request'] = {
         in: "body",
         description: "Ejemplo de request",
         required: true,
-        schema: { $ref: "#/definitions/RequestInsertUser"}
+        schema: { $ref: "#/definitions/RequestInsertClient"}
       }
    */
 };
 
-const updateUser = (req = request, res = response) => {
-  const { idUsuario, username, password, rut, nombres, apellidos, correo } = req.body;
-  let sql = `CALL sp_upd_usuario('${idUsuario}','${username}','${password}','${rut}','${nombres}','${apellidos}','${correo}')`;
+const updateClient = (req = request, res = response) => {
+  const { idCliente, empresa, rut } = req.body;
+  let sql = `CALL sp_upd_cliente('${idCliente}','${empresa}','${rut}')`;
   const { rol } = req.body.payload;
 
   if (rol === "Administrador") {
@@ -96,7 +95,7 @@ const updateUser = (req = request, res = response) => {
       if (!result) {
         res.json({
           cod: 200,
-          msg: "Usuario actualizado con éxito",
+          msg: "Cliente actualizado con éxito",
         });
       } else {
         res.status(400).json({
@@ -112,20 +111,20 @@ const updateUser = (req = request, res = response) => {
     });
   }
   /**
-   * #swagger.tags = ["Users"]
-   * #swagger.description = "Endpoint para actualizar usuarios del sistema"
+   * #swagger.tags = ["Clients"]
+   * #swagger.description = "Endpoint para actualizar clientes del sistema"
    * #swagger.parameters['Request'] = {
         in: "body",
         description: "Ejemplo de request",
         required: true,
-        schema: { $ref: "#/definitions/RequestUpdateUser"}
+        schema: { $ref: "#/definitions/RequestUpdateClient"}
       }
    */
 };
 
-const deleteUser = (req = request, res = response) => {
+const deleteClient = (req = request, res = response) => {
   const { id } = req.params;
-  let sql = `CALL sp_del_usuario('${id}')`;
+  let sql = `CALL sp_del_cliente('${id}')`;
   const { rol } = req.body.payload;
 
   if (rol === "Administrador") {
@@ -133,7 +132,7 @@ const deleteUser = (req = request, res = response) => {
       if (!result) {
         res.json({
           cod: 200,
-          msg: "Usuario desactivado con éxito",
+          msg: "Cliente desactivado con éxito",
         });
       } else {
         res.status(400).json({
@@ -149,17 +148,17 @@ const deleteUser = (req = request, res = response) => {
     });
   }
   /**
-   * #swagger.tags = ["Users"]
-   * #swagger.description = "Endpoint para desactivar usuarios del sistema"
+   * #swagger.tags = ["Clients"]
+   * #swagger.description = "Endpoint para desactivar clientes del sistema"
    * #swagger.parameters['Request'] = {
                 in: 'body',
                 schema: {}
    */
 };
 
-const activateUser = (req = request, res = response) => {
+const activateClient = (req = request, res = response) => {
   const { id } = req.params;
-  let sql = `CALL sp_activar_usuario('${id}')`;
+  let sql = `CALL sp_activar_cliente('${id}')`;
   const { rol } = req.body.payload;
 
   if (rol === "Administrador") {
@@ -167,7 +166,7 @@ const activateUser = (req = request, res = response) => {
       if (!result) {
         res.json({
           cod: 200,
-          msg: "Usuario activado con éxito",
+          msg: "Cliente activado con éxito",
         });
       } else {
         res.status(400).json({
@@ -183,8 +182,8 @@ const activateUser = (req = request, res = response) => {
     });
   }
   /**
-   * #swagger.tags = ["Users"]
-   * #swagger.description = "Endpoint para activar usuarios del sistema"
+   * #swagger.tags = ["Clients"]
+   * #swagger.description = "Endpoint para activar clientes del sistema"
    * #swagger.parameters['Request'] = {
                 in: 'body',
                 schema: {}
@@ -193,10 +192,10 @@ const activateUser = (req = request, res = response) => {
 
 
 module.exports = {
-  getUsers,
-  getUserById,
-  insertUser,
-  updateUser,
-  deleteUser,
-  activateUser
+  getClients,
+  getClientById,
+  insertClient,
+  updateClient,
+  deleteClient,
+  activateClient
 };

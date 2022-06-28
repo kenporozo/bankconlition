@@ -16,19 +16,23 @@ const doc = {
     produces: ["application/json"],
     tags: [
         {
-            "name" : "Users",
-            "description" : "CRUD de usuarios para rol Administrador"
+            "name" : "Clients",
+            "description" : "CRUD de clientes para rol Administrador"
+        },
+        {
+            "name" : "Accounts",
+            "description" : "CRUD de cuentas para rol Administrador"
         },
         {
             "name" : "Login",
             "description" : "Autenticación de usuarios del sistema"
+        },
+        {
+            "name" : "Users",
+            "description" : "CRUD de usuarios para rol Administrador"
         }
     ],
     definitions: {
-        RequestLogin :{
-            usuario : "pperes",
-            password : "pperez"
-        },
         RequestInsertUser:{
             idCliente : 2,
             username : "userAPI221",
@@ -38,13 +42,27 @@ const doc = {
             apellidos : "lopez",
             correo : "juan_lopez@gmail.cl"
         },
+        RequestInsertClient:{
+            empresa : "empresa test",
+            rut : "1221-3"
+        },
+        RequestLogin :{
+            usuario : "pperes",
+            password : "pperez"
+        },
         RequestUpdateUser:{
+            idUsuario : 9,
             username : "userAPI221",
             password : "123abc",
             rut : "8-911",
             nombres : "juan",
             apellidos : "lopez",
             correo : "juan_lopez@gmail.cl"
+        },
+        RequestUpdateClient:{
+            idCliente : 2,
+            empresa : "empresa update test",
+            rut : "1221-31"
         },
     }
 }
