@@ -27,7 +27,7 @@ const getClientById = (req = request, res = response) => {
   
     if (rol === "Administrador") {
       db(sql, res, (result) => {
-        if (result) {
+        if (result[0]) {
           res.json(result[0]);
         } else {
           res.status(400).json({
