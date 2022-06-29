@@ -1217,6 +1217,86 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_ins_usuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ins_usuario`(
+  IN `arg_Id_Cliente` int,
+  IN `arg_Id_TipoUsuario` int,
+  IN `arg_Usuario` varchar(45),
+  IN `arg_Password` varchar(45),
+  IN `arg_Rut` varchar(45),
+  IN `arg_Nombres` varchar(45),
+  IN `arg_Apellidos` varchar(45),
+  IN `arg_Correo` varchar(100)
+)
+BEGIN
+  DECLARE v_estado_activo INT;
+  DECLARE v_existe_usuario INT;
+  DECLARE v_existe_rut INT;
+  DECLARE v_existe_correo INT;
+  
+  SET v_estado_activo = 1;
+  SET v_existe_usuario = 0;
+  SET v_existe_rut = 0;
+  SET v_existe_correo = 0;
+  
+  /*Verificar si existe el nombre de usuario*/
+  SELECT COUNT(*) INTO v_existe_usuario FROM bankcolition.usuario WHERE Usuario = `arg_Usuario`;
+  
+  /*Verificar si existe el rut*/
+  SELECT COUNT(*) INTO v_existe_rut FROM bankcolition.usuario WHERE Rut = `arg_Rut`;
+  
+  /*Verificar si existe el correo*/
+  SELECT COUNT(*) INTO v_existe_correo FROM bankcolition.usuario WHERE Correo = `arg_Correo`;
+  
+  IF (v_existe_usuario > 0) THEN
+    SELECT "El nombre de usuario ya existe" AS msg;
+  ELSEIF (v_existe_rut > 0) THEN
+	SELECT "El rut ya esta registrado en la base de datos" AS msg;
+  ELSEIF (v_existe_correo > 0) THEN
+	SELECT "El correo ya esta registrado en la base de datos" AS msg;
+  ELSE
+	INSERT INTO `usuario`
+	  (
+		`Id_Cliente`,
+		`Id_TipoUsuario`,
+		`Usuario`,
+		`Password`,
+		`Rut`,
+		`Nombres`,
+		`Apellidos`,
+		`Correo`,
+		`id_estado`
+	  )
+	  VALUES 
+	  (
+		`arg_Id_Cliente`,
+		`arg_Id_TipoUsuario`,
+		`arg_Usuario`,
+		`arg_Password`,
+		`arg_Rut`,
+		`arg_Nombres`,
+		`arg_Apellidos`,
+		`arg_Correo`,
+		 v_estado_activo
+	  );
+      SELECT "Usuario creado con éxito" AS msg, @@identity AS id;
+  END IF;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_ListarCartola` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -2235,4 +2315,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-27 22:14:53
+-- Dump completed on 2022-06-28 20:09:13
