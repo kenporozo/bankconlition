@@ -2,11 +2,11 @@ const { response, request } = require("express");
 const bcryptjs = require("bcryptjs");
 const db = require("../database/connection");
 
-const getUsers = (req = request, res = response) => {
-  let sql = "CALL sp_sel_usuario()";
+const getAccounts = (req = request, res = response) => {
+  let sql = "CALL sp_sel_cuentabancaria()";
   const { rol } = req.body.payload;
   if (rol === "Administrador") {
-    db(sql, res, (result) => res.json({ users: result }));
+    db(sql, res, (result) => res.json({ accounts: result }));
   } else {
     return res.status(401).json({
       cod: 401,
@@ -15,14 +15,14 @@ const getUsers = (req = request, res = response) => {
   }
 
   /**
-   * #swagger.tags = ["Users"]
-   * #swagger.description = "Endpoint para obtener una lista con todos los usuarios del sistema"
+   * #swagger.tags = ["Accounts"]
+   * #swagger.description = "Endpoint para obtener una lista con todas las cuentas bancarias en el sistema"
    */
 };
 
-const getUserById = (req = request, res = response) => {
+const getAccountById = (req = request, res = response) => {
   const { id } = req.params;
-  let sql = `CALL sp_sel_usuario_by_id('${id}')`;
+  let sql = `CALL sp_sel_cuentabancaria_by_id('${id}')`;
   const { rol } = req.body.payload;
 
   if (rol === "Administrador") {
@@ -32,7 +32,7 @@ const getUserById = (req = request, res = response) => {
       } else {
         res.status(400).json({
           cod: 400,
-          msg: "El usuario que buscas, no existe",
+          msg: "La cuenta bancaria que buscas, no existe",
         });
       }
     });
@@ -43,24 +43,24 @@ const getUserById = (req = request, res = response) => {
     });
   }
   /**
-     * #swagger.tags = ["Users"]
-     * #swagger.description = "Endpoint para obtener usuarios por id"
+     * #swagger.tags = ["Accounts"]
+     * #swagger.description = "Endpoint para obtener cuentas bancarias por id"
      * #swagger.parameters['Request'] = {
                   in: 'body',
                   schema: {}
      */
 };
 
-const insertUser = (req = request, res = response) => {
-  const { idCliente, username, password, rut, nombres, apellidos, correo } =
+const insertAccount = (req = request, res = response) => {
+  const { idCliente, idBanco, idTipoCuenta, rut, password, numeroCuenta } =
     req.body;
+  const { rol } = req.body.payload;
 
   //Encriptar password
   const salt = bcryptjs.genSaltSync();
   const passwordEncrypted = bcryptjs.hashSync(password, salt);
 
-  let sql = `CALL sp_ins_usuario('${idCliente}','${username}','${passwordEncrypted}','${rut}','${nombres}','${apellidos}','${correo}')`;
-  const { rol } = req.body.payload;
+  let sql = `CALL sp_ins_cuentabancaria('${idCliente}','${idBanco}','${idTipoCuenta}','${rut}','${passwordEncrypted}','${numeroCuenta}')`;
 
   if (rol === "Administrador") {
     db(sql, res, (result) => {
@@ -80,34 +80,33 @@ const insertUser = (req = request, res = response) => {
     });
   }
   /**
-   * #swagger.tags = ["Users"]
-   * #swagger.description = "Endpoint para crear usuarios del sistema"
+   * #swagger.tags = ["Accounts"]
+   * #swagger.description = "Endpoint para crear cuentas bancarias en el sistema"
    * #swagger.parameters['Request'] = {
         in: "body",
         description: "Ejemplo de request",
         required: true,
-        schema: { $ref: "#/definitions/RequestInsertUser"}
+        schema: { $ref: "#/definitions/RequestInsertAccount"}
       }
    */
 };
 
-const updateUser = (req = request, res = response) => {
-  const { idUsuario, username, password, rut, nombres, apellidos, correo } =
-    req.body;
+const updateAccount = (req = request, res = response) => {
+  const { idCuenta, idBanco, idTipoCuenta, rut, password, numeroCuenta } = req.body;
+  const { rol } = req.body.payload;
 
   //Encriptar password
   const salt = bcryptjs.genSaltSync();
   const passwordEncrypted = bcryptjs.hashSync(password, salt);
 
-  let sql = `CALL sp_upd_usuario('${idUsuario}','${username}','${passwordEncrypted}','${rut}','${nombres}','${apellidos}','${correo}')`;
-  const { rol } = req.body.payload;
+  let sql = `CALL sp_upd_cuentabancaria('${idCuenta}','${idBanco}','${idTipoCuenta}','${rut}','${passwordEncrypted}','${numeroCuenta}')`;
 
   if (rol === "Administrador") {
     db(sql, res, (result) => {
       if (!result) {
         res.json({
           cod: 200,
-          msg: "Usuario actualizado con éxito",
+          msg: "Cuenta bancaria actualizada con éxito",
         });
       } else {
         res.status(400).json({
@@ -123,20 +122,20 @@ const updateUser = (req = request, res = response) => {
     });
   }
   /**
-   * #swagger.tags = ["Users"]
-   * #swagger.description = "Endpoint para actualizar usuarios del sistema"
+   * #swagger.tags = ["Accounts"]
+   * #swagger.description = "Endpoint para actualizar cuentas bancarias del sistema"
    * #swagger.parameters['Request'] = {
         in: "body",
         description: "Ejemplo de request",
         required: true,
-        schema: { $ref: "#/definitions/RequestUpdateUser"}
+        schema: { $ref: "#/definitions/RequestUpdateAccount"}
       }
    */
 };
 
-const deleteUser = (req = request, res = response) => {
+const deleteAccount = (req = request, res = response) => {
   const { id } = req.params;
-  let sql = `CALL sp_del_usuario('${id}')`;
+  let sql = `CALL sp_del_cuentabancaria('${id}')`;
   const { rol } = req.body.payload;
 
   if (rol === "Administrador") {
@@ -144,7 +143,7 @@ const deleteUser = (req = request, res = response) => {
       if (!result) {
         res.json({
           cod: 200,
-          msg: "Usuario desactivado con éxito",
+          msg: "Cuenta bancaria desactivada con éxito",
         });
       } else {
         res.status(400).json({
@@ -160,17 +159,17 @@ const deleteUser = (req = request, res = response) => {
     });
   }
   /**
-   * #swagger.tags = ["Users"]
-   * #swagger.description = "Endpoint para desactivar usuarios del sistema"
+   * #swagger.tags = ["Accounts"]
+   * #swagger.description = "Endpoint para desactivar cuentas bancarias del sistema"
    * #swagger.parameters['Request'] = {
                 in: 'body',
                 schema: {}
    */
 };
 
-const activateUser = (req = request, res = response) => {
+const activateAccount = (req = request, res = response) => {
   const { id } = req.params;
-  let sql = `CALL sp_activar_usuario('${id}')`;
+  let sql = `CALL sp_activar_cuenta('${id}')`;
   const { rol } = req.body.payload;
 
   if (rol === "Administrador") {
@@ -178,7 +177,7 @@ const activateUser = (req = request, res = response) => {
       if (!result) {
         res.json({
           cod: 200,
-          msg: "Usuario activado con éxito",
+          msg: "Cuenta bancaria activada con éxito",
         });
       } else {
         res.status(400).json({
@@ -194,8 +193,8 @@ const activateUser = (req = request, res = response) => {
     });
   }
   /**
-   * #swagger.tags = ["Users"]
-   * #swagger.description = "Endpoint para activar usuarios del sistema"
+   * #swagger.tags = ["Accounts"]
+   * #swagger.description = "Endpoint para activar cuentas bancarias del sistema"
    * #swagger.parameters['Request'] = {
                 in: 'body',
                 schema: {}
@@ -203,10 +202,10 @@ const activateUser = (req = request, res = response) => {
 };
 
 module.exports = {
-  getUsers,
-  getUserById,
-  insertUser,
-  updateUser,
-  deleteUser,
-  activateUser,
+  getAccounts,
+  getAccountById,
+  insertAccount,
+  updateAccount,
+  deleteAccount,
+  activateAccount
 };

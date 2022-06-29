@@ -34,8 +34,9 @@ class Server {
 
   routes() {
     this.app.use(this.basePath, require("../routes/auth"));
-    this.app.use(this.basePath, require("../routes/users"));
+    this.app.use(this.basePath, require("../routes/accounts"));
     this.app.use(this.basePath, require("../routes/clients"));
+    this.app.use(this.basePath, require("../routes/users"));
     this.app.use(
       `${this.basePath}/docs`,
       swaggerUI.serve,

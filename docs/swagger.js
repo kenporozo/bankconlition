@@ -16,12 +16,12 @@ const doc = {
     produces: ["application/json"],
     tags: [
         {
-            "name" : "Clients",
-            "description" : "CRUD de clientes para rol Administrador"
-        },
-        {
             "name" : "Accounts",
             "description" : "CRUD de cuentas para rol Administrador"
+        },
+        {
+            "name" : "Clients",
+            "description" : "CRUD de clientes para rol Administrador"
         },
         {
             "name" : "Login",
@@ -42,6 +42,14 @@ const doc = {
             apellidos : "lopez",
             correo : "juan_lopez@gmail.cl"
         },
+        RequestInsertAccount:{
+            idCliente : 2,
+            idBanco : 2,
+            idTipoBanco : 1,
+            rut : "8-911",
+            password : "123abc",
+            numeroCuenta : "999999999"
+        },
         RequestInsertClient:{
             empresa : "empresa test",
             rut : "1221-3"
@@ -58,6 +66,14 @@ const doc = {
             nombres : "juan",
             apellidos : "lopez",
             correo : "juan_lopez@gmail.cl"
+        },
+        RequestUpdateAccount:{
+            idCuenta : 9,
+            idBanco : 2,
+            idTipoBanco : 1,
+            rut : "8-911",
+            password : "123abc",
+            numeroCuenta : "999999999"
         },
         RequestUpdateClient:{
             idCliente : 2,
