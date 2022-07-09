@@ -10,7 +10,13 @@ const login = (req = request, res = response) => {
 
   db(sql, res, (result) => {
     if (result[0]) {
-      const user = result[0];
+      const {pass, ...user} = result[0];
+      if(!bcryptjs.compareSync(password, pass)){
+        res.status(401).json({
+          cod: 401,
+          msg: "Contraseña incorrecta",
+        });
+      }
       createJWT(user, (error, token) =>{
         if(error){
           console.log(error);
