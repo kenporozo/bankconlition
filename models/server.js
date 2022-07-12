@@ -30,12 +30,15 @@ class Server {
 
     //Morgan
     this.app.use(morgan(morganFormat));
+
+    this.app.use(express.urlencoded({ extended: true }));
   }
 
   routes() {
     this.app.use(this.basePath, require("../routes/auth"));
     this.app.use(this.basePath, require("../routes/accounts"));
     this.app.use(this.basePath, require("../routes/clients"));
+    this.app.use(this.basePath, require("../routes/cartolas"));
     this.app.use(this.basePath, require("../routes/users"));
     this.app.use(
       `${this.basePath}/docs`,
