@@ -20,6 +20,10 @@ const doc = {
             "description" : "CRUD de cuentas para rol Administrador"
         },
         {
+            "name" : "Cartolas",
+            "description" : "Listado de cartolas y conciliación"
+        },
+        {
             "name" : "Clients",
             "description" : "CRUD de clientes para rol Administrador"
         },

@@ -14,7 +14,6 @@ const validateToken = (req = request, res = response, next) =>{
     try {
         
         const payload = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
-        console.log("Payload", payload);
         req.body.payload = payload;
         console.log(req.body)
         next()
