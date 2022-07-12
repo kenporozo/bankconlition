@@ -66,7 +66,7 @@ const getCartolas = (req = request, res = response) => {
       } else {
         res.status(400).json({
           cod: 400,
-          msg: "La cuenta que buscas no existe",
+          msg: "La cuenta que buscas no existe o no tiene registros",
         });
       }
     });

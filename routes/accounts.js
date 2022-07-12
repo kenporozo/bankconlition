@@ -79,20 +79,6 @@ router.put("/accounts",[
     .custom(idCuenta => idCuenta > 0)
     .withMessage("El id de cuenta debe ser mayor a 0")
     .bail(),
-    check("idBanco")
-    .isNumeric()
-    .withMessage("El id banco debe ser numerico")
-    .bail()
-    .custom(idBanco => idBanco > 0)
-    .withMessage("El id banco debe ser mayor a 0")
-    .bail(),
-    check("idTipoCuenta")
-    .isNumeric()
-    .withMessage("El id tipo cuenta debe ser numerico")
-    .bail()
-    .custom(idTipoCuenta => idTipoCuenta > 0)
-    .withMessage("El id tipo cuenta debe ser mayor a 0")
-    .bail(),
     check("rut")
     .notEmpty()
     .withMessage("El rut es obligatorio")
@@ -103,16 +89,6 @@ router.put("/accounts",[
     .bail()
     .custom(password => /([\S])+/.test(password))
     .withMessage("La contraseña no puede llevar espacios en blanco")
-    .bail(),
-    check("numeroCuenta")
-    .isNumeric()
-    .withMessage("El cliente debe ser numerico")
-    .bail()
-    .isLength({min: 6, max: 45})
-    .withMessage("El numero de cuenta debe llevar entre 6 y 45 caracteres")
-    .bail()
-    .custom(idCliente => idCliente > 0)
-    .withMessage("El id cliente debe ser mayor a 0")
     .bail(),
     validateToken,
     validation

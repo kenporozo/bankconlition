@@ -92,14 +92,14 @@ const insertAccount = (req = request, res = response) => {
 };
 
 const updateAccount = (req = request, res = response) => {
-  const { idCuenta, idBanco, idTipoCuenta, rut, password, numeroCuenta } = req.body;
+  const { idCuenta, rut, password } = req.body;
   const { rol } = req.body.payload;
 
   //Encriptar password
   const salt = bcryptjs.genSaltSync();
   const passwordEncrypted = bcryptjs.hashSync(password, salt);
 
-  let sql = `CALL sp_upd_cuentabancaria('${idCuenta}','${idBanco}','${idTipoCuenta}','${rut}','${passwordEncrypted}','${numeroCuenta}')`;
+  let sql = `CALL sp_upd_cuentabancaria('${idCuenta}','${rut}','${passwordEncrypted}')`;
 
   if (rol === "Administrador") {
     db(sql, res, (result) => {
