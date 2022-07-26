@@ -507,6 +507,2955 @@ UNLOCK TABLES;
 --
 -- Dumping events for database 'bankcolition'
 --
+
+--
+-- Dumping routines for database 'bankcolition'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `sp_activar_cliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_activar_cliente`(
+  IN `arg_Id` int
+)
+BEGIN
+	DECLARE v_id_estado_activo INT;
+    DECLARE v_existe_id INT;
+    
+    SET v_existe_id = 0;
+	SET v_id_estado_activo = 1;
+  
+  /*Verificar si existe el id de usuario*/
+  SELECT COUNT(*) INTO v_existe_id FROM bankcolition.cliente WHERE Id = `arg_Id`;
+  
+  IF v_existe_id > 0 THEN
+	UPDATE bankcolition.cliente 
+    SET id_estado = v_id_estado_activo 
+    WHERE Id = `arg_Id`;
+  ELSE
+    SELECT "El cliente que intentas activar no existe" as msg;  
+  END IF;
+    
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_activar_cuenta` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_activar_cuenta`(
+  IN `arg_Id` int
+)
+BEGIN
+	DECLARE v_id_estado_activo INT;
+    DECLARE v_existe_id INT;
+    
+    SET v_existe_id = 0;
+	SET v_id_estado_activo = 1;
+  
+  /*Verificar si existe el id de cuenta bancaria*/
+  SELECT COUNT(*) INTO v_existe_id FROM bankcolition.cuentabancaria WHERE Id = `arg_Id`;
+  
+  IF v_existe_id > 0 THEN
+	UPDATE bankcolition.cuentabancaria 
+    SET id_estado = v_id_estado_activo 
+    WHERE Id = `arg_Id`;
+  ELSE
+    SELECT "La cuenta bancaria que intentas activar no existe" as msg;  
+  END IF;
+    
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_activar_usuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_activar_usuario`(
+  IN `arg_Id` int
+)
+BEGIN
+	DECLARE v_id_estado_activo INT;
+    DECLARE v_existe_id INT;
+    
+    SET v_existe_id = 0;
+	SET v_id_estado_activo = 1;
+  
+  /*Verificar si existe el id de usuario*/
+  SELECT COUNT(*) INTO v_existe_id FROM bankcolition.usuario WHERE Id = `arg_Id`;
+  
+  IF v_existe_id > 0 THEN
+	UPDATE bankcolition.usuario 
+    SET id_estado = v_id_estado_activo 
+    WHERE Id = `arg_Id`;
+  ELSE
+    SELECT "El usuario que intentas activar no existe" as msg;  
+  END IF;
+    
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_del_banco` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_del_banco`(
+  IN `arg_Id` int
+)
+BEGIN
+  DELETE FROM `banco`
+  WHERE     
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_del_cartola` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_del_cartola`(
+  IN `arg_Id` int
+)
+BEGIN
+  DELETE FROM `cartola`
+  WHERE     
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_del_cliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_del_cliente`(
+  IN `arg_Id` int
+)
+BEGIN
+	DECLARE v_id_estado_inactivo INT;
+    DECLARE v_existe_id INT;
+    
+    SET v_existe_id = 0;
+	SET v_id_estado_inactivo = 2;
+  
+  /*Verificar si existe el id de cliente*/
+  SELECT COUNT(*) INTO v_existe_id FROM bankcolition.cliente WHERE Id = `arg_Id`;
+  
+  IF v_existe_id > 0 THEN
+	UPDATE bankcolition.cliente 
+    SET id_estado = v_id_estado_inactivo 
+    WHERE Id = `arg_Id`;
+  ELSE
+    SELECT "El cliente que intentas desactivar no existe" as msg;  
+  END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_del_conciliacionbancaria` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_del_conciliacionbancaria`(
+  IN `arg_Id` int
+)
+BEGIN
+  DELETE FROM `conciliacionbancaria`
+  WHERE     
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_del_contrato` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_del_contrato`(
+  IN `arg_Id` int
+)
+BEGIN
+  DELETE FROM `contrato`
+  WHERE     
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_del_cuentabancaria` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_del_cuentabancaria`(
+  IN `arg_Id` int
+)
+BEGIN
+	DECLARE v_id_estado_inactivo INT;
+    DECLARE v_existe_id INT;
+    
+    SET v_existe_id = 0;
+	SET v_id_estado_inactivo = 2;
+  
+  /*Verificar si existe el id de usuario*/
+  SELECT COUNT(*) INTO v_existe_id FROM bankcolition.cuentabancaria WHERE Id = `arg_Id`;
+  
+  IF v_existe_id > 0 THEN
+	UPDATE bankcolition.cuentabancaria 
+    SET id_estado = v_id_estado_inactivo 
+    WHERE Id = `arg_Id`;
+  ELSE
+    SELECT "La cuenta bancaria que intentas desactivar no existe" as msg;  
+  END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_del_librodiario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_del_librodiario`(
+  IN `arg_Id` int
+)
+BEGIN
+  DELETE FROM `librodiario`
+  WHERE     
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_del_movimientolibrodiario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_del_movimientolibrodiario`(
+  IN `arg_Id` int
+)
+BEGIN
+  DELETE FROM `movimientolibrodiario`
+  WHERE     
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_del_movimientoscartola` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_del_movimientoscartola`(
+  IN `arg_Id` int
+)
+BEGIN
+  DELETE FROM `movimientoscartola`
+  WHERE     
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_del_movimientoscliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_del_movimientoscliente`(
+   IN 
+  `arg_Id`
+   int
+)
+BEGIN
+  DELETE FROM `movimientoscliente`
+  WHERE     
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_del_registroscliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_del_registroscliente`(
+   IN 
+  `arg_Id`
+   int
+)
+BEGIN
+  DELETE FROM `registroscliente`
+  WHERE     
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_del_tipocuenta` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_del_tipocuenta`(
+  IN `arg_Id` int
+)
+BEGIN
+  DELETE FROM `tipocuenta`
+  WHERE     
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_del_tipousuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_del_tipousuario`(
+  IN `arg_Id` int
+)
+BEGIN
+  DELETE FROM `tipousuario`
+  WHERE     
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_del_usuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_del_usuario`(
+  IN `arg_Id` int
+)
+BEGIN
+	DECLARE v_id_estado_inactivo INT;
+    DECLARE v_existe_id INT;
+    
+    SET v_existe_id = 0;
+	SET v_id_estado_inactivo = 2;
+  
+  /*Verificar si existe el id de usuario*/
+  SELECT COUNT(*) INTO v_existe_id FROM bankcolition.usuario WHERE Id = `arg_Id`;
+  
+  IF v_existe_id > 0 THEN
+	UPDATE bankcolition.usuario 
+    SET id_estado = v_id_estado_inactivo 
+    WHERE Id = `arg_Id`;
+  ELSE
+    SELECT "El usuario que intentas desactivar no existe" as msg;  
+  END IF;
+    
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_getCuentasBancarias` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getCuentasBancarias`()
+BEGIN
+	SELECT cb.Id_Cliente, cb.Id_Banco, cb.Id Id_CuentaBancaria, cb.id_tipoCuenta, cb.NumeroCuenta, cb.rut, cb.Password, b.EntidadBancaria, b.url
+		FROM bankcolition.cuentabancaria cb
+		inner join bankcolition.banco b on 
+			cb.id_banco = b.id
+	where cb.id_estado = 1;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_getIdCartola` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getIdCartola`(  
+	IN arg_Id_CuentaBancaria int,
+	IN arg_NumeroCartola int
+)
+BEGIN
+
+	#declare Id_Cartola int;
+
+	select 
+		ID
+	from `bankcolition`.`Cartola` where Id_CuentaBancaria = arg_Id_CuentaBancaria and NumeroCartola = arg_NumeroCartola;
+    
+    #return Id_Cartola;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_IngresarLibroDiario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_IngresarLibroDiario`(
+	IN `arg_Cliente_Id` int,
+	IN `arg_FechaDesde` varchar(10), 
+    IN `arg_FechaHasta` varchar(10)
+
+)
+BEGIN
+    
+	Select 
+		c.NumeroCartola,
+		mc.FechaMovimiento,
+		mc.NumeroDocumento,
+		mc.Descripcion,
+		mc.Monto,
+		mc.CargoAbono
+	from bankcolition.cuentabancaria cb
+	inner join bankcolition.cartola c on
+		cb.Id = c.Id_CuentaBancaria
+	inner join bankcolition.movimientoscartola mc on
+		c.Id = mc.Id_Cartola
+	where 
+		cb.Id_Cliente = `arg_Cliente_Id` and mc.FechaMovimiento between date(`arg_FechaDesde`) and date(`arg_FechaHasta`);
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_ins_banco` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ins_banco`(
+  IN `arg_EntidadBancaria` varchar(45)
+)
+BEGIN
+  INSERT INTO `banco`
+  (
+    `EntidadBancaria`
+  )
+  VALUES 
+  (
+    `arg_EntidadBancaria`
+  );
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_ins_cartola` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ins_cartola`(
+  IN `arg_Id_CuentaBancaria` int,
+  IN `arg_CuentaCorriente` varchar(45),
+  IN `arg_NumeroCartola` int,
+  IN `arg_Moneda` int,
+  IN `arg_FechaDesde` date,
+  IN `arg_FechaHasta` date,
+  IN `arg_SaldoInicial` bigint,
+  IN `arg_Deposito` bigint,
+  IN `arg_OtrosAbonos` bigint,
+  IN `arg_Cheques` bigint,
+  IN `arg_OtrosCargos` bigint,
+  IN `arg_Impuestos` bigint,
+  IN `arg_SaldoFinal` bigint,
+  IN `arg_CreditoCupoAprobado` bigint,
+  IN `arg_CreditoMontoUtilizado` bigint,
+  IN `arg_CreditoSaldoDisponible` bigint,
+  IN `arg_TotalMovimientos` bigint,
+  IN `arg_Cuadratura` tinyint,
+  IN `arg_Archivo` blob
+)
+BEGIN
+  INSERT INTO `cartola`
+  (
+    `Id_CuentaBancaria`,
+    `CuentaCorriente`,
+    `NumeroCartola`,
+    `Moneda`,
+    `FechaDesde`,
+    `FechaHasta`,
+    `SaldoInicial`,
+    `Deposito`,
+    `OtrosAbonos`,
+    `Cheques`,
+    `OtrosCargos`,
+    `Impuestos`,
+    `SaldoFinal`,
+    `CreditoCupoAprobado`,
+    `CreditoMontoUtilizado`,
+    `CreditoSaldoDisponible`,
+    `TotalMovimientos`,
+    `Cuadratura`,
+    `Archivo`
+  )
+  VALUES 
+  (
+    `arg_Id_CuentaBancaria`,
+    `arg_CuentaCorriente`,
+    `arg_NumeroCartola`,
+    `arg_Moneda`,
+    `arg_FechaDesde`,
+    `arg_FechaHasta`,
+    `arg_SaldoInicial`,
+    `arg_Deposito`,
+    `arg_OtrosAbonos`,
+    `arg_Cheques`,
+    `arg_OtrosCargos`,
+    `arg_Impuestos`,
+    `arg_SaldoFinal`,
+    `arg_CreditoCupoAprobado`,
+    `arg_CreditoMontoUtilizado`,
+    `arg_CreditoSaldoDisponible`,
+    `arg_TotalMovimientos`,
+    `arg_Cuadratura`,
+    `arg_Archivo`
+  );
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_ins_cliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ins_cliente`(
+  IN `arg_Rut` varchar(45),
+  IN `arg_Empresa` varchar(45)
+)
+BEGIN
+  DECLARE v_estado_activo INT;
+  DECLARE v_existe_empresa INT;
+  DECLARE v_existe_rut INT;
+  
+  SET v_estado_activo = 1;
+  SET v_existe_empresa = 0;
+  SET v_existe_rut = 0;
+  
+  /*Verificar si existe el nombre de empresa*/
+  SELECT COUNT(*) INTO v_existe_empresa FROM bankcolition.cliente WHERE Empresa = `arg_Empresa`;
+  
+  /*Verificar si existe el rut*/
+  SELECT COUNT(*) INTO v_existe_rut FROM bankcolition.cliente WHERE Rut = `arg_Rut`;
+  
+  IF (v_existe_empresa > 0) THEN
+    SELECT "El nombre de la empresa ya existe" AS msg;
+  ELSEIF (v_existe_rut > 0) THEN
+	SELECT "El rut ya esta registrado en la base de datos" AS msg;
+  ELSE
+	INSERT INTO `cliente`
+	  (
+		`Rut`,
+		`Empresa`,
+		`id_estado`
+	  )
+	  VALUES 
+	  (
+		`arg_Rut`,
+		`arg_Empresa`,
+		 v_estado_activo
+	  );
+      SELECT "Cliente creado con éxito" AS msg, @@identity AS id;
+  END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_ins_conciliacionbancaria` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ins_conciliacionbancaria`(
+  IN `arg_Id_CuentaBancaria` int,
+  IN `arg_Id_Cartola` int,
+  IN `arg_Id_MovimientoCartola` int,
+  IN `arg_Id_LibroDiario` int,
+  IN `arg_Id_MovimientoLibroDiario` int,
+  IN `arg_FechaDesde` date,
+  IN `arg_FechaHasta` date
+)
+BEGIN
+  INSERT INTO `conciliacionbancaria`
+  (
+    `Id_CuentaBancaria`,
+    `Id_Cartola`,
+    `Id_MovimientoCartola`,
+    `Id_LibroDiario`,
+    `Id_MovimientoLibroDiario`,
+    `FechaDesde`,
+    `FechaHasta`
+  )
+  VALUES 
+  (
+    `arg_Id_CuentaBancaria`,
+    `arg_Id_Cartola`,
+    `arg_Id_MovimientoCartola`,
+    `arg_Id_LibroDiario`,
+    `arg_Id_MovimientoLibroDiario`,
+    `arg_FechaDesde`,
+    `arg_FechaHasta`
+  );
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_ins_contrato` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ins_contrato`(
+  IN `arg_Id_Cliente` int,
+  IN `arg_Contrato` varchar(45),
+  IN `arg_Descripcion` varchar(1000)
+)
+BEGIN
+  INSERT INTO `contrato`
+  (
+    `Id_Cliente`,
+    `Contrato`,
+    `Descripcion`
+  )
+  VALUES 
+  (
+    `arg_Id_Cliente`,
+    `arg_Contrato`,
+    `arg_Descripcion`
+  );
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_ins_cuentabancaria` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ins_cuentabancaria`(
+  IN `arg_Id_Cliente` int,
+  IN `arg_Id_Banco` int,
+  IN `arg_Id_TipoCuenta` int,
+  IN `arg_Rut` varchar(45),
+  IN `arg_Password` varchar(255),
+  IN `arg_NumeroCuenta` varchar(45)
+)
+BEGIN
+  DECLARE v_estado_activo INT;
+  DECLARE v_existe_cliente INT;
+  DECLARE v_existe_banco INT;
+  DECLARE v_existe_tipo_cuenta INT;
+  DECLARE v_existe_numero_cuenta INT;
+  
+  SET v_estado_activo = 1;
+  SET v_existe_cliente = 0;
+  SET v_existe_banco = 0;
+  SET v_existe_tipo_cuenta = 0;
+  SET v_existe_numero_cuenta = 0;
+  
+  /*Verificar si existe el id cliente*/
+  SELECT COUNT(*) INTO v_existe_cliente FROM bankcolition.cliente WHERE Id = `arg_Id_Cliente`;
+  
+  /*Verificar si existe el banco*/
+  SELECT COUNT(*) INTO v_existe_banco FROM bankcolition.banco WHERE Id = `arg_Id_Banco`;
+  
+  /*Verificar si existe el tipo de cuenta*/
+  SELECT COUNT(*) INTO v_existe_tipo_cuenta FROM bankcolition.tipocuenta WHERE Id = `arg_Id_TipoCuenta`;
+  
+  /*Verificar si existe el numero de cuenta*/
+  SELECT COUNT(*) INTO v_existe_numero_cuenta FROM bankcolition.cuentabancaria WHERE NumeroCuenta = `arg_NumeroCuenta`;
+  
+  IF (v_existe_cliente = 0) THEN
+    SELECT "El cliente al que tratas de asociar la cuenta no existe" AS msg;
+  ELSEIF (v_existe_banco = 0) THEN
+	SELECT "El banco al que tratas de asociar la cuenta no existe" AS msg;
+  ELSEIF (v_existe_tipo_cuenta = 0) THEN
+	SELECT "El tipo de cuenta al que intentas asociar la cuenta no existe" AS msg;
+  ELSEIF (v_existe_numero_cuenta > 0) THEN
+	SELECT "El numero de cuenta ya esta registrado" AS msg;
+  ELSE
+	INSERT INTO `cuentabancaria`
+	  (
+		`Id_Cliente`,
+		`Id_Banco`,
+		`Id_TipoCuenta`,
+		`Rut`,
+		`Password`,
+		`NumeroCuenta`,
+		`id_estado`
+	  )
+	  VALUES 
+	  (
+		`arg_Id_Cliente`,
+		`arg_Id_Banco`,
+		`arg_Id_TipoCuenta`,
+		`arg_Rut`,
+		`arg_Password`,
+		`arg_NumeroCuenta`,
+		 v_estado_activo
+	  );
+      SELECT "Cuenta agregada con éxito" AS msg, @@identity AS id;
+  END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_ins_librodiario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ins_librodiario`(
+  IN `arg_Id_CuentaBancaria` int,
+  IN `arg_Moneda` int,
+  IN `arg_FechaDesde` date,
+  IN `arg_FechaHasta` date,
+  IN `arg_TotalMovimientos` bigint,
+  IN `arg_Saldo` bigint,
+  IN `arg_Cuadratura` tinyint,
+  IN `arg_Archivo` blob
+)
+BEGIN
+  INSERT INTO `librodiario`
+  (
+    `Id_CuentaBancaria`,
+    `Moneda`,
+    `FechaDesde`,
+    `FechaHasta`,
+    `TotalMovimientos`,
+    `Saldo`,
+    `Cuadratura`,
+    `Archivo`
+  )
+  VALUES 
+  (
+    `arg_Id_CuentaBancaria`,
+    `arg_Moneda`,
+    `arg_FechaDesde`,
+    `arg_FechaHasta`,
+    `arg_TotalMovimientos`,
+    `arg_Saldo`,
+    `arg_Cuadratura`,
+    `arg_Archivo`
+  );
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_ins_movimientolibrodiario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ins_movimientolibrodiario`(
+  IN `arg_Id_RegistrosCartola` int,
+  IN `arg_Monto` bigint,
+  IN `arg_Descripcion` varchar(45),
+  IN `arg_FechaMovimiento` date,
+  IN `arg_NumeroDocumento` bigint,
+  IN `arg_Sucursal` varchar(45),
+  IN `arg_CargoAbono` varchar(45)
+)
+BEGIN
+  INSERT INTO `movimientolibrodiario`
+  (
+    `Id_RegistrosCartola`,
+    `Monto`,
+    `Descripcion`,
+    `FechaMovimiento`,
+    `NumeroDocumento`,
+    `Sucursal`,
+    `CargoAbono`
+  )
+  VALUES 
+  (
+    `arg_Id_RegistrosCartola`,
+    `arg_Monto`,
+    `arg_Descripcion`,
+    `arg_FechaMovimiento`,
+    `arg_NumeroDocumento`,
+    `arg_Sucursal`,
+    `arg_CargoAbono`
+  );
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_ins_movimientoscartola` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ins_movimientoscartola`(
+  IN `arg_Id_Cartola` int,
+  IN `arg_Monto` bigint,
+  IN `arg_Descripcion` varchar(45),
+  IN `arg_FechaMovimiento` date,
+  IN `arg_NumeroDocumento` bigint,
+  IN `arg_Sucursal` varchar(45),
+  IN `arg_CargoAbono` varchar(45)
+)
+BEGIN
+  INSERT INTO `movimientoscartola`
+  (
+    `Id_Cartola`,
+    `Monto`,
+    `Descripcion`,
+    `FechaMovimiento`,
+    `NumeroDocumento`,
+    `Sucursal`,
+    `CargoAbono`
+  )
+  VALUES 
+  (
+    `arg_Id_Cartola`,
+    `arg_Monto`,
+    `arg_Descripcion`,
+    `arg_FechaMovimiento`,
+    `arg_NumeroDocumento`,
+    `arg_Sucursal`,
+    `arg_CargoAbono`
+  );
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_ins_movimientoscliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ins_movimientoscliente`(
+  IN `arg_Id_RegistrosCartola` int,
+  IN `arg_Monto` bigint,
+  IN `arg_Descripcion` varchar(45),
+  IN `arg_FechaMovimiento` date,
+  IN `arg_NumeroDocumento` bigint,
+  IN `arg_Sucursal` varchar(45),
+  IN `arg_CargoAbono` varchar(45)
+)
+BEGIN
+  INSERT INTO `movimientoscliente`
+  (
+    `Id_RegistrosCartola`,
+    `Monto`,
+    `Descripcion`,
+    `FechaMovimiento`,
+    `NumeroDocumento`,
+    `Sucursal`,
+    `CargoAbono`
+  )
+  VALUES 
+  (
+    `arg_Id_RegistrosCartola`,
+    `arg_Monto`,
+    `arg_Descripcion`,
+    `arg_FechaMovimiento`,
+    `arg_NumeroDocumento`,
+    `arg_Sucursal`,
+    `arg_CargoAbono`
+  );
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_ins_registroscliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ins_registroscliente`(
+  IN `arg_Id_CuentaBancaria` int,
+  IN `arg_Moneda` int,
+  IN `arg_FechaDesde` date,
+  IN `arg_FechaHasta` date,
+  IN `arg_TotalMovimientos` bigint,
+  IN `arg_Saldo` bigint,
+  IN `arg_Cuadratura` tinyint,
+  IN `arg_Archivo` blob
+)
+BEGIN
+  INSERT INTO `registroscliente`
+  (
+    `Id_CuentaBancaria`,
+    `Moneda`,
+    `FechaDesde`,
+    `FechaHasta`,
+    `TotalMovimientos`,
+    `Saldo`,
+    `Cuadratura`,
+    `Archivo`
+  )
+  VALUES 
+  (
+    `arg_Id_CuentaBancaria`,
+    `arg_Moneda`,
+    `arg_FechaDesde`,
+    `arg_FechaHasta`,
+    `arg_TotalMovimientos`,
+    `arg_Saldo`,
+    `arg_Cuadratura`,
+    `arg_Archivo`
+  );
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_ins_tipocuenta` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ins_tipocuenta`(
+  IN `arg_Descripcion` varchar(45)
+)
+BEGIN
+  INSERT INTO `tipocuenta`
+  (
+    `Descripcion`
+  )
+  VALUES 
+  (
+    `arg_Descripcion`
+  );
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_ins_tipousuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ins_tipousuario`(
+  IN `arg_Descripcion` varchar(45)
+)
+BEGIN
+  INSERT INTO `tipousuario`
+  (
+    `Descripcion`
+  )
+  VALUES 
+  (
+    `arg_Descripcion`
+  );
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_ins_usuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ins_usuario`(
+  IN `arg_Id_Cliente` int,
+  IN `arg_Usuario` varchar(45),
+  IN `arg_Password` varchar(255),
+  IN `arg_Rut` varchar(45),
+  IN `arg_Nombres` varchar(45),
+  IN `arg_Apellidos` varchar(45),
+  IN `arg_Correo` varchar(100)
+)
+BEGIN
+  DECLARE v_estado_activo INT;
+  DECLARE v_tipo_usuario INT;
+  DECLARE v_existe_usuario INT;
+  DECLARE v_existe_rut INT;
+  DECLARE v_existe_correo INT;
+  
+  SET v_estado_activo = 1;
+  SET v_tipo_usuario = 2;
+  SET v_existe_usuario = 0;
+  SET v_existe_rut = 0;
+  SET v_existe_correo = 0;
+  
+  /*Verificar si existe el nombre de usuario*/
+  SELECT COUNT(*) INTO v_existe_usuario FROM bankcolition.usuario WHERE Usuario = `arg_Usuario`;
+  
+  /*Verificar si existe el rut*/
+  SELECT COUNT(*) INTO v_existe_rut FROM bankcolition.usuario WHERE Rut = `arg_Rut`;
+  
+  /*Verificar si existe el correo*/
+  SELECT COUNT(*) INTO v_existe_correo FROM bankcolition.usuario WHERE Correo = `arg_Correo`;
+  
+  IF (v_existe_usuario > 0) THEN
+    SELECT "El nombre de usuario ya existe" AS msg;
+  ELSEIF (v_existe_rut > 0) THEN
+	SELECT "El rut ya esta registrado en la base de datos" AS msg;
+  ELSEIF (v_existe_correo > 0) THEN
+	SELECT "El correo ya esta registrado en la base de datos" AS msg;
+  ELSE
+	INSERT INTO `usuario`
+	  (
+		`Id_Cliente`,
+		`Id_TipoUsuario`,
+		`Usuario`,
+		`Password`,
+		`Rut`,
+		`Nombres`,
+		`Apellidos`,
+		`Correo`,
+		`id_estado`
+	  )
+	  VALUES 
+	  (
+		`arg_Id_Cliente`,
+		v_tipo_usuario,
+		`arg_Usuario`,
+		`arg_Password`,
+		`arg_Rut`,
+		`arg_Nombres`,
+		`arg_Apellidos`,
+		`arg_Correo`,
+		 v_estado_activo
+	  );
+      SELECT "Usuario creado con éxito" AS msg, @@identity AS id;
+  END IF;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_jsonCartola` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_jsonCartola`(
+	IN pParametroJson    JSON
+)
+BEGIN 
+    DECLARE vJsonEsValido INT;
+    DECLARE vItems INT;
+    DECLARE vIndex BIGINT UNSIGNED DEFAULT 0;
+    DECLARE vUpsert INT;
+    
+    # Variables para parseo del objeto JSON
+	DECLARE vCampo1 int;
+	DECLARE vCampo2 varchar(45);
+	DECLARE vCampo3 int;
+	DECLARE vCampo4 varchar(45);
+	DECLARE vCampo5 date;
+	DECLARE vCampo6 date;
+	DECLARE vCampo7 bigint;
+	DECLARE vCampo8 bigint;
+	DECLARE vCampo9 bigint;
+	DECLARE vCampo10 bigint;
+	DECLARE vCampo11 bigint;
+	DECLARE vCampo12 bigint;
+	DECLARE vCampo13 bigint;
+	DECLARE vCampo14 bigint;
+	DECLARE vCampo15 bigint;
+	DECLARE vCampo16 bigint;
+	DECLARE vCampo17 bigint;
+	DECLARE vCampo18 tinyint(1);
+	DECLARE vCampo19 blob; 
+    
+    SET vJsonEsValido = JSON_VALID(pParametroJson);
+    
+    IF vJsonEsValido = 0 THEN 
+        # El objeto JSON no es válido, salimos prematuramente
+        SELECT "JSON suministrado no es válido";
+    ELSE 
+        # Nuestro objeto es válido, podemos proceder
+        SET vItems = JSON_LENGTH(pParametroJson);
+        
+        #Select vItems, pParametroJson;
+        
+        # El objeto es válido y contiene al menos un elemento
+        IF vItems > 0 THEN 
+            # Creamos una tabla temporal donde guardaremos momentáneamente
+            # el contenido del objeto JSON para facilitar su uso
+            DROP TEMPORARY TABLE IF EXISTS `tmp_Cartola`;
+            CREATE TEMPORARY TABLE `tmp_Cartola` (
+			  `Id_CuentaBancaria` int DEFAULT NULL,
+			  `CuentaCorriente` varchar(45) DEFAULT NULL,
+			  `NumeroCartola` int DEFAULT NULL,
+			  `Moneda` varchar(45) DEFAULT NULL,
+			  `FechaDesde` date NOT NULL,
+			  `FechaHasta` date NOT NULL,
+			  `SaldoInicial` bigint DEFAULT NULL,
+			  `Deposito` bigint DEFAULT NULL,
+			  `OtrosAbonos` bigint DEFAULT NULL,
+			  `Cheques` bigint DEFAULT NULL,
+			  `OtrosCargos` bigint DEFAULT NULL,
+			  `Impuestos` bigint DEFAULT NULL,
+			  `SaldoFinal` bigint DEFAULT NULL,
+			  `CreditoCupoAprobado` bigint DEFAULT NULL,
+			  `CreditoMontoUtilizado` bigint DEFAULT NULL,
+			  `CreditoSaldoDisponible` bigint DEFAULT NULL,
+			  `TotalMovimientos` bigint DEFAULT NULL,
+			  `Cuadratura` tinyint(1) NOT NULL,
+			  `Archivo` blob
+              );
+            
+            WHILE vIndex < vItems DO
+				#select vIndex;
+			
+				SET vCampo1 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Id_CuentaBancaria')));
+				SET vCampo2 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].CuentaCorriente')));
+				SET vCampo3 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].NumeroCartola')));
+				SET vCampo4 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Moneda')));
+				SET vCampo5 = str_to_date(JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].FechaDesde'))),'%d/%m/%Y');
+				SET vCampo6 = str_to_date(JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].FechaHasta'))),'%d/%m/%Y');
+				SET vCampo7 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].SaldoInicial')));
+				SET vCampo8 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Deposito')));
+				SET vCampo9 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].OtrosAbonos')));
+				SET vCampo10 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Cheques')));
+				SET vCampo11 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].OtrosCargos')));
+				SET vCampo12 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Impuestos')));
+				SET vCampo13 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].SaldoFinal')));
+				SET vCampo14 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].CreditoCupoAprobado')));
+				SET vCampo15 = if( (JSON_TYPE(JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].CreditoMontoUtilizado')))) = 'NULL'), NULL, JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].CreditoMontoUtilizado'))) );
+				SET vCampo16 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].CreditoSaldoDisponible')));
+				SET vCampo17 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].TotalMovimientos')));
+				SET vCampo18 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Cuadratura')));
+				SET vCampo19 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Archivo')));
+                
+                
+				select ID into vUpsert from Cartola where Id_CuentaBancaria = vCampo1 and NumeroCartola = vCampo3;	
+                
+                IF vUpsert is null or vUpsert < 1 Then                
+					INSERT INTO `Cartola` 
+						(`Id_CuentaBancaria`, `CuentaCorriente`, `NumeroCartola`, `Moneda`, `FechaDesde`, `FechaHasta`, `SaldoInicial`, `Deposito`, `OtrosAbonos`, `Cheques`, `OtrosCargos`, `Impuestos`, `SaldoFinal`, `CreditoCupoAprobado`, `CreditoMontoUtilizado`,`CreditoSaldoDisponible`,`TotalMovimientos`,`Cuadratura`,`Archivo`)
+					VALUES
+						(vCampo1, vCampo2, vCampo3, vCampo4, vCampo5, vCampo6, vCampo7, vCampo8, vCampo9, vCampo10, vCampo11, vCampo12, vCampo13, vCampo14, vCampo15, vCampo16, vCampo17, vCampo18, vCampo19)
+					ON DUPLICATE KEY UPDATE
+						`Id_CuentaBancaria` = vCampo1 and `NumeroCartola` = vCampo3;
+				ELSE
+					UPDATE `bankcolition`.`cartola`
+						SET
+						`Id_CuentaBancaria` = vCampo1,
+						`CuentaCorriente` = vCampo2,
+						`NumeroCartola` = vCampo3,
+						`Moneda` = vCampo4,
+						`FechaDesde` = vCampo5,
+						`FechaHasta` = vCampo6,
+						`SaldoInicial` = vCampo7,
+						`Deposito` = vCampo8,
+						`OtrosAbonos` = vCampo9,
+						`Cheques` = vCampo10,
+						`OtrosCargos` = vCampo11,
+						`Impuestos` = vCampo12,
+						`SaldoFinal` = vCampo13,
+						`CreditoCupoAprobado` = vCampo14,
+						`CreditoMontoUtilizado` = vCampo15,
+						`CreditoSaldoDisponible` = vCampo16,
+						`TotalMovimientos` = vCampo17,
+						`Cuadratura` = vCampo18,
+						`Archivo` = vCampo19
+						WHERE `Id_CuentaBancaria` = vCampo1 AND `NumeroCartola` = vCampo3;
+				END IF;
+						
+				#INSERT INTO `tmp_Cartola` 
+				#	(`Id_CuentaBancaria`, `CuentaCorriente`, `NumeroCartola`, `Moneda`, `FechaDesde`, `FechaHasta`, `SaldoInicial`, `Deposito`, `OtrosAbonos`, `Cheques`, `OtrosCargos`, `Impuestos`, `SaldoFinal`, `CreditoCupoAprobado`, `CreditoMontoUtilizado`,`CreditoSaldoDisponible`,`TotalMovimientos`,`Cuadratura`,`Archivo`)
+				#VALUES
+				#	(vCampo1, vCampo2, vCampo3, vCampo4, vCampo5, vCampo6, vCampo7, vCampo8, vCampo9, vCampo10, vCampo11, vCampo12, vCampo13, vCampo14, vCampo15, vCampo16, vCampo17, vCampo18, vCampo19);
+							
+				SET vIndex = vIndex + 1;                    
+            END WHILE;
+            
+            
+            #INSERT INTO `Cartola` 
+			#	(`Id_CuentaBancaria`, `CuentaCorriente`, `NumeroCartola`, `Moneda`, `FechaDesde`, `FechaHasta`, `SaldoInicial`, `Deposito`, `OtrosAbonos`, `Cheques`, `OtrosCargos`, `Impuestos`, `SaldoFinal`, `CreditoCupoAprobado`, `CreditoMontoUtilizado`,`CreditoSaldoDisponible`,`TotalMovimientos`,`Cuadratura`,`Archivo`)
+
+            DROP TEMPORARY TABLE IF EXISTS `tmp_Cartola`;
+            
+        END IF;
+    END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_jsonMovimientosCartola` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_jsonMovimientosCartola`(
+	IN arg_id_Cartola	INT,
+    IN pParametroJson   JSON
+)
+BEGIN 
+    DECLARE vJsonEsValido INT;
+    DECLARE vItems INT;
+    DECLARE vIndex BIGINT UNSIGNED DEFAULT 0;
+    # DECLARE vDelete BIGINT UNSIGNED DEFAULT 0;
+    
+    # Variables para parseo del objeto JSON
+	DECLARE vCampo1 int;
+	DECLARE vCampo2 bigint;
+	DECLARE vCampo3 varchar(45);
+	DECLARE vCampo4 date;
+	DECLARE vCampo5 bigint;
+	DECLARE vCampo6 varchar(45);
+	DECLARE vCampo7 varchar(45);
+    
+    SET vJsonEsValido = JSON_VALID(pParametroJson);
+    
+    IF vJsonEsValido = 0 THEN 
+        # El objeto JSON no es válido, salimos prematuramente
+        SELECT "JSON suministrado no es válido";
+    ELSE 
+        # Nuestro objeto es válido, podemos proceder
+        SET vItems = JSON_LENGTH(pParametroJson);
+        
+        #Select vItems, pParametroJson;
+        
+        # El objeto es válido y contiene al menos un elemento
+        IF vItems > 0 THEN 
+            # Creamos una tabla temporal donde guardaremos momentáneamente
+            # el contenido del objeto JSON para facilitar su uso
+            DROP TEMPORARY TABLE IF EXISTS `tmp_MovimientosCartola`;
+            CREATE TEMPORARY TABLE `tmp_MovimientosCartola` (
+				  `Id_Cartola` int DEFAULT NULL,
+				  `Monto` bigint DEFAULT NULL,
+				  `Descripcion` varchar(45) DEFAULT NULL,
+				  `FechaMovimiento` date DEFAULT NULL,
+				  `NumeroDocumento` bigint DEFAULT NULL,
+				  `Sucursal` varchar(45) DEFAULT NULL,
+				  `CargoAbono` varchar(45) DEFAULT NULL
+				);
+			
+            
+			Delete from `bankcolition`.`movimientoscartola` WHERE `Id_Cartola` = arg_id_Cartola;
+                        
+            WHILE vIndex < vItems DO
+				#select vIndex;
+			
+				SET vCampo1 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Id_Cartola')));
+				SET vCampo2 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Monto')));
+				SET vCampo3 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Descripcion')));
+				SET vCampo4 = str_to_date(JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].FechaMovimiento'))),'%d/%m/%Y');
+				SET vCampo5 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].NumeroDocumento')));
+				SET vCampo6 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Sucursal')));
+				SET vCampo7 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].CargoAbono')));
+
+                INSERT INTO `bankcolition`.`movimientoscartola`
+						(`Id_Cartola`, `Monto`, `Descripcion`, `FechaMovimiento`, `NumeroDocumento`, `Sucursal`, `CargoAbono`)
+					VALUES
+						(vCampo1, vCampo2, vCampo3, vCampo4, vCampo5, vCampo6, vCampo7);
+						
+				SET vIndex = vIndex + 1;                    
+            END WHILE;
+            
+            DROP TEMPORARY TABLE IF EXISTS `tmp_MovimientosCartola`;
+            
+        END IF;
+    END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_ListarCartola` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ListarCartola`(
+	IN `arg_Cliente_Id` INT,
+    IN `arg_Cuenta_Id` INT,
+	IN `arg_FechaDesde` VARCHAR(10), 
+    IN `arg_FechaHasta` VARCHAR(10)
+
+)
+BEGIN
+    IF(`arg_FechaDesde` = '0' OR `arg_FechaHasta` = 0) THEN
+    SELECT 
+		c.NumeroCartola,
+		mc.FechaMovimiento,
+		mc.NumeroDocumento,
+		mc.Descripcion,
+		mc.Monto,
+		mc.CargoAbono
+	FROM bankcolition.cuentabancaria cb
+	INNER JOIN bankcolition.cartola c ON
+		cb.Id = c.Id_CuentaBancaria
+	INNER JOIN bankcolition.movimientoscartola mc ON
+		c.Id = mc.Id_Cartola
+	WHERE 
+        cb.Id = `arg_Cuenta_Id`
+        AND cb.Id_Cliente = `arg_Cliente_Id`;
+	ELSE
+		Select 
+			c.NumeroCartola,
+			mc.FechaMovimiento,
+			mc.NumeroDocumento,
+			mc.Descripcion,
+			mc.Monto,
+			mc.CargoAbono
+		FROM bankcolition.cuentabancaria cb
+		INNER JOIN bankcolition.cartola c ON
+			cb.Id = c.Id_CuentaBancaria
+		INNER JOIN bankcolition.movimientoscartola mc ON
+			c.Id = mc.Id_Cartola
+		WHERE 
+			mc.FechaMovimiento BETWEEN DATE(`arg_FechaDesde`) AND DATE(`arg_FechaHasta`)
+			AND cb.Id = `arg_Cuenta_Id`
+			AND cb.Id_Cliente = `arg_Cliente_Id`;
+    END IF;
+	
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_MostrarConciliacion` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_MostrarConciliacion`(
+	IN `arg_Cliente_Id` int	,
+    IN `arg_FechaDesde` varchar(10),
+    IN `arg_FechaHasta` varchar(10)
+)
+BEGIN
+
+	# Buscar Cartolas
+    CREATE TEMPORARY TABLE IF NOT EXISTS tmp_Show AS (
+		Select 
+			bc.Id_Cliente,
+            bc.Id_CuentaBancaria Id_CuentaBancaria,
+            bc.Id_Cartola Id_Cartola,
+			bc.Id_MovimientoCartola Id_MovimientoCartola,
+            bc.Id_LibroDiario Id_LibroDiario,
+			bc.Id_MovimientoLibroDiario Id_MovimientoLibroDiario,
+			cb.NumeroCuenta NumeroCuenta,
+			ca.NumeroCartola NumeroCartola,
+			bc.FechaMovimiento FechaMovimiento,
+			IFNULL(mca.NumeroDocumento, mcl.NumeroDocumento) NumeroDocumento,
+			IFNULL(mca.Descripcion, mcl.Descripcion) Descripcion,
+			IFNULL(mca.Monto, mcl.Monto) Monto,
+			IFNULL(mca.CargoAbono, mcl.CargoAbono) CargoAbono,
+			ec.Descripcion estado
+		from bankcolition.conciliacionbancaria bc
+		inner join bankcolition.estado ec on
+			bc.Id_Estado = ec.Id
+		left join bankcolition.movimientoscartola mca on
+			bc.Id_MovimientoCartola = mca.Id
+		left join bankcolition.cartola ca on
+			mca.Id_Cartola = ca.Id
+		left join bankcolition.movimientolibrodiario mcl on
+			bc.Id_MovimientoLibroDiario = mcl.Id
+		left join bankcolition.cuentabancaria cb on
+			bc.Id_CuentaBancaria = cb.Id
+		where 
+			bc.Id_Cliente = `arg_Cliente_Id` 
+		and bc.FechaMovimiento between date(`arg_FechaDesde`) and date(`arg_FechaHasta`)
+		group by 			
+			bc.Id_Cliente,
+            bc.Id_CuentaBancaria,
+            bc.Id_Cartola,
+			bc.Id_MovimientoCartola,
+            bc.Id_LibroDiario,
+			bc.Id_MovimientoLibroDiario,
+			cb.NumeroCuenta,
+			ca.NumeroCartola,
+			bc.FechaMovimiento,
+			IFNULL(mca.NumeroDocumento, mcl.NumeroDocumento),
+			IFNULL(mca.Descripcion, mcl.Descripcion),
+			IFNULL(mca.Monto, mcl.Monto),
+			IFNULL(mca.CargoAbono, mcl.CargoAbono));
+        
+        Select 
+			NumeroCuenta,
+			NumeroCartola,
+			FechaMovimiento,
+			NumeroDocumento,
+			Descripcion,
+			Monto,
+			CargoAbono,
+			estado
+        from tmp_Show;
+        
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_RealizaConciliacion` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_RealizaConciliacion`(
+	IN `arg_Cliente_Id` int	,
+    IN `arg_FechaDesde` varchar(10),
+    IN `arg_FechaHasta` varchar(10)
+)
+BEGIN
+
+	# Buscar Cartolas
+    CREATE TEMPORARY TABLE IF NOT EXISTS tmp_Union AS (
+	Select *
+    from (
+		Select 
+			cb.Id_Cliente CB_Id_Cliente,
+            c.Id_CuentaBancaria CB_Id_CuentaBancaria,
+            mc.Id_Cartola CB_Id_Cartola,
+			mc.Id CB_Id_MovimientoCartola,
+			c.NumeroCartola CB_NumeroCartola,
+			mc.FechaMovimiento CB_FechaMovimiento,
+			mc.NumeroDocumento CB_NumeroDocumento,
+			mc.Descripcion CB_Descripcion,
+			mc.Monto CB_Monto,
+			mc.CargoAbono CB_CargoAbono
+		from bankcolition.cuentabancaria cb
+		inner join bankcolition.cartola c on
+			cb.Id = c.Id_CuentaBancaria
+		inner join bankcolition.movimientoscartola mc on
+			c.Id = mc.Id_Cartola
+		where 
+			cb.Id_Cliente = `arg_Cliente_Id` 
+		and mc.FechaMovimiento between date(`arg_FechaDesde`) and date(`arg_FechaHasta`)
+	) CartolasBancarias
+    LEFT OUTER JOIN (
+		Select 
+			cb.Id_Cliente LD_Id_Cliente,
+            rc.Id_CuentaBancaria LD_Id_CuentaBancaria,
+            mc.Id_LibroDiario LD_Id_LibroDiario,
+            mc.Id LD_Id_MovimientoLibroDiario,
+			mc.FechaMovimiento LD_FechaMovimiento,
+			mc.NumeroDocumento LD_NumeroDocumento,
+			mc.Descripcion LD_Descripcion,
+			mc.Monto LD_Monto,
+			mc.CargoAbono LD_CargoAbono
+		from bankcolition.cuentabancaria cb
+		inner join bankcolition.librodiario rc on
+			cb.Id = rc.Id_CuentaBancaria
+		inner join bankcolition.movimientolibrodiario mc on
+			rc.Id = mc.Id_LibroDiario
+		where 
+			cb.Id_Cliente = `arg_Cliente_Id` 
+		and mc.FechaMovimiento between date(`arg_FechaDesde`) and date(`arg_FechaHasta`)
+	) LibroDiario on
+			CartolasBancarias.CB_Id_Cliente = LibroDiario.LD_Id_Cliente
+		and CartolasBancarias.CB_Id_CuentaBancaria = LibroDiario.LD_Id_CuentaBancaria
+		and CartolasBancarias.CB_FechaMovimiento = LibroDiario.LD_FechaMovimiento
+		and CartolasBancarias.CB_NumeroDocumento = LibroDiario.LD_NumeroDocumento
+		and CartolasBancarias.CB_Monto = LibroDiario.LD_Monto
+		and CartolasBancarias.CB_CargoAbono = LibroDiario.LD_CargoAbono
+	UNION ALL
+	Select *
+    from (
+		Select 
+			cb.Id_Cliente CB_Id_Cliente,
+            c.Id_CuentaBancaria CB_Id_CuentaBancaria,
+            mc.Id_Cartola CB_Id_Cartola,
+			mc.Id CB_Id_MovimientoCartola,
+			c.NumeroCartola CB_NumeroCartola,
+			mc.FechaMovimiento CB_FechaMovimiento,
+			mc.NumeroDocumento CB_NumeroDocumento,
+			mc.Descripcion CB_Descripcion,
+			mc.Monto CB_Monto,
+			mc.CargoAbono CB_CargoAbono
+		from bankcolition.cuentabancaria cb
+		inner join bankcolition.cartola c on
+			cb.Id = c.Id_CuentaBancaria
+		inner join bankcolition.movimientoscartola mc on
+			c.Id = mc.Id_Cartola
+		where 
+			cb.Id_Cliente = `arg_Cliente_Id` 
+		and mc.FechaMovimiento between date(`arg_FechaDesde`) and date(`arg_FechaHasta`)
+	) CartolasBancarias
+    RIGHT OUTER JOIN (
+		Select 
+			cb.Id_Cliente LD_Id_Cliente,
+            rc.Id_CuentaBancaria LD_Id_CuentaBancaria,
+            mc.Id_LibroDiario LD_librodiario,
+            mc.Id LD_Id_MovimientoLibroDiario,
+			mc.FechaMovimiento LD_FechaMovimiento,
+			mc.NumeroDocumento LD_NumeroDocumento,
+			mc.Descripcion LD_Descripcion,
+			mc.Monto LD_Monto,
+			mc.CargoAbono LD_CargoAbono
+		from bankcolition.cuentabancaria cb
+		inner join bankcolition.librodiario rc on
+			cb.Id = rc.Id_CuentaBancaria
+		inner join bankcolition.movimientolibrodiario mc on
+			rc.Id = mc.Id_LibroDiario
+		where 
+			cb.Id_Cliente = `arg_Cliente_Id` 
+		and mc.FechaMovimiento between date(`arg_FechaDesde`) and date(`arg_FechaHasta`)
+	) LibroDiario on
+			CartolasBancarias.CB_Id_Cliente = LibroDiario.LD_Id_Cliente
+		and CartolasBancarias.CB_Id_CuentaBancaria = LibroDiario.LD_Id_CuentaBancaria
+		and CartolasBancarias.CB_FechaMovimiento = LibroDiario.LD_FechaMovimiento
+		and CartolasBancarias.CB_NumeroDocumento = LibroDiario.LD_NumeroDocumento
+		and CartolasBancarias.CB_Monto = LibroDiario.LD_Monto
+		and CartolasBancarias.CB_CargoAbono = LibroDiario.LD_CargoAbono
+	WHERE CartolasBancarias.CB_Id_Cliente IS NULL);
+	
+    #Select * from tmp_Union;
+    
+    CREATE TEMPORARY TABLE IF NOT EXISTS tmp_Bank_Colition AS (
+		Select 
+			IFNULL(LD_Id_Cliente, CB_Id_Cliente) Id_Cliente,
+			IFNULL(LD_Id_CuentaBancaria, CB_Id_CuentaBancaria) Id_CuentaBancaria,
+			CB_Id_Cartola Id_Cartola,
+			CB_Id_MovimientoCartola Id_MovimientoCartola,
+			LD_Id_LibroDiario Id_LibroDiario,
+			LD_Id_MovimientoLibroDiario Id_MovimientoLibroDiario,
+			IFNULL(LD_FechaMovimiento, CB_FechaMovimiento) FechaMovimiento,
+			CASE 
+				WHEN LD_Id_Cliente = CB_Id_Cliente THEN 3
+				WHEN CB_Id_Cliente is null THEN 5
+				WHEN LD_Id_Cliente is null THEN 6
+				ELSE 4
+			END as Id_Estado
+		from tmp_Union tu);    
+
+	Select * from tmp_Bank_Colition tbc;
+    
+    INSERT INTO `bankcolition`.`conciliacionbancaria` (Id_Cliente, Id_CuentaBancaria, Id_Cartola, Id_MovimientoCartola, Id_LibroDiario, Id_MovimientoLibroDiario,FechaMovimiento, Id_Estado)
+		Select * from tmp_Bank_Colition tbc;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_registrarDatos` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_registrarDatos`(
+	IN `arg_Cliente_Id` int,
+	IN `arg_FechaDesde` varchar(10), 
+    IN `arg_FechaHasta` varchar(10)
+
+)
+BEGIN
+    
+	Select 
+		c.NumeroCartola,
+		mc.FechaMovimiento,
+		mc.NumeroDocumento,
+		mc.Descripcion,
+		mc.Monto,
+		mc.CargoAbono
+	from bankcolition.cuentabancaria cb
+	inner join bankcolition.cartola c on
+		cb.Id = c.Id_CuentaBancaria
+	inner join bankcolition.movimientoscartola mc on
+		c.Id = mc.Id_Cartola
+	where 
+		cb.Id_Cliente = `arg_Cliente_Id` and mc.FechaMovimiento between date(`arg_FechaDesde`) and date(`arg_FechaHasta`);
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_sel_banco` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_sel_banco`()
+BEGIN
+  SELECT
+    `Id`,
+    `EntidadBancaria`
+  FROM `banco`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_sel_cartola` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_sel_cartola`()
+BEGIN
+  SELECT
+    `Id`,
+    `Id_CuentaBancaria`,
+    `CuentaCorriente`,
+    `NumeroCartola`,
+    `Moneda`,
+    `FechaDesde`,
+    `FechaHasta`,
+    `SaldoInicial`,
+    `Deposito`,
+    `OtrosAbonos`,
+    `Cheques`,
+    `OtrosCargos`,
+    `Impuestos`,
+    `SaldoFinal`,
+    `CreditoCupoAprobado`,
+    `CreditoMontoUtilizado`,
+    `CreditoSaldoDisponible`,
+    `TotalMovimientos`,
+    `Cuadratura`,
+    `Archivo`
+  FROM `cartola`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_sel_cliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_sel_cliente`()
+BEGIN
+  SELECT
+    cliente.Id,
+    `Rut`,
+    `Empresa`,
+    estado.descripcion AS Estado
+  FROM `cliente`
+  INNER JOIN estado ON cliente.id_estado = estado.Id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_sel_cliente_by_id` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_sel_cliente_by_id`(
+  IN `arg_Id` int
+)
+BEGIN
+  SELECT
+    cliente.Id,
+    `Rut`,
+    `Empresa`,
+    estado.descripcion AS Estado
+  FROM `cliente`
+  INNER JOIN estado ON cliente.id_estado = estado.Id
+  WHERE cliente.Id = arg_Id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_sel_conciliacionbancaria` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_sel_conciliacionbancaria`()
+BEGIN
+  SELECT
+    `Id`,
+    `Id_CuentaBancaria`,
+    `Id_Cartola`,
+    `Id_MovimientoCartola`,
+    `Id_LibroDiario`,
+    `Id_MovimientoLibroDiario`,
+    `FechaDesde`,
+    `FechaHasta`
+  FROM `conciliacionbancaria`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_sel_contrato` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_sel_contrato`()
+BEGIN
+  SELECT
+    `Id`,
+    `Id_Cliente`,
+    `Contrato`,
+    `Descripcion`
+  FROM `contrato`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_sel_cuentabancaria` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_sel_cuentabancaria`()
+BEGIN
+    SELECT
+    cuentabancaria.Id,
+    cliente.Empresa,
+    banco.EntidadBancaria,
+    tipocuenta.descripcion AS TipoCuenta,
+    cuentabancaria.Rut,
+    RPAD(SUBSTR(cuentabancaria.NumeroCuenta, 1, 4), Length(cuentabancaria.NumeroCuenta), '*') AS NumeroCuenta,
+    estado.descripcion AS Estado
+  FROM `cuentabancaria`
+  INNER JOIN cliente ON cuentabancaria.id_cliente = cliente.Id
+  INNER JOIN tipocuenta ON cuentabancaria.id_tipocuenta = tipocuenta.Id
+  INNER JOIN banco ON cuentabancaria.id_banco = banco.Id
+  INNER JOIN estado ON cuentabancaria.id_estado = estado.Id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_sel_cuentabancaria_by_id` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_sel_cuentabancaria_by_id`(
+  IN `arg_Id` int
+)
+BEGIN
+  SELECT
+    cuentabancaria.Id,
+    cliente.Empresa,
+    banco.EntidadBancaria,
+    tipocuenta.descripcion AS TipoCuenta,
+    cuentabancaria.Rut,
+    RPAD(SUBSTR(cuentabancaria.NumeroCuenta, 1, 4), Length(cuentabancaria.NumeroCuenta), '*') AS NumeroCuenta,
+    estado.descripcion AS Estado
+  FROM `cuentabancaria`
+  INNER JOIN cliente ON cuentabancaria.id_cliente = cliente.Id
+  INNER JOIN tipocuenta ON cuentabancaria.id_tipocuenta = tipocuenta.Id
+  INNER JOIN banco ON cuentabancaria.id_banco = banco.Id
+  INNER JOIN estado ON cuentabancaria.id_estado = estado.Id
+  WHERE cuentabancaria.Id = arg_Id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_sel_librodiario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_sel_librodiario`()
+BEGIN
+  SELECT
+    `Id`,
+    `Id_CuentaBancaria`,
+    `Moneda`,
+    `FechaDesde`,
+    `FechaHasta`,
+    `TotalMovimientos`,
+    `Saldo`,
+    `Cuadratura`,
+    `Archivo`
+  FROM `librodiario`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_sel_movimientolibrodiario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_sel_movimientolibrodiario`()
+BEGIN
+  SELECT
+    `Id`,
+    `Id_RegistrosCartola`,
+    `Monto`,
+    `Descripcion`,
+    `FechaMovimiento`,
+    `NumeroDocumento`,
+    `Sucursal`,
+    `CargoAbono`
+  FROM `movimientolibrodiario`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_sel_movimientoscartola` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_sel_movimientoscartola`()
+BEGIN
+  SELECT
+    `Id`,
+    `Id_Cartola`,
+    `Monto`,
+    `Descripcion`,
+    `FechaMovimiento`,
+    `NumeroDocumento`,
+    `Sucursal`,
+    `CargoAbono`
+  FROM `movimientoscartola`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_sel_movimientoscliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_sel_movimientoscliente`()
+BEGIN
+  SELECT
+    `Id`,
+    `Id_RegistrosCartola`,
+    `Monto`,
+    `Descripcion`,
+    `FechaMovimiento`,
+    `NumeroDocumento`,
+    `Sucursal`,
+    `CargoAbono`
+  FROM `movimientoscliente`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_sel_registroscliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_sel_registroscliente`()
+BEGIN
+  SELECT
+    `Id`,
+    `Id_CuentaBancaria`,
+    `Moneda`,
+    `FechaDesde`,
+    `FechaHasta`,
+    `TotalMovimientos`,
+    `Saldo`,
+    `Cuadratura`,
+    `Archivo`
+  FROM `registroscliente`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_sel_tipocuenta` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_sel_tipocuenta`()
+BEGIN
+  SELECT
+    `Id`,
+    `Descripcion`
+  FROM `tipocuenta`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_sel_tipousuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_sel_tipousuario`()
+BEGIN
+  SELECT
+    `Id`,
+    `Descripcion`
+  FROM `tipousuario`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_sel_usuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_sel_usuario`()
+BEGIN
+  SELECT
+    usuario.Id,
+    `Id_Cliente`,
+    `Id_TipoUsuario`,
+    `Usuario`,
+    `Password`,
+    `Rut`,
+    `Nombres`,
+    `Apellidos`,
+    `Correo`,
+    estado.descripcion AS Estado
+  FROM `usuario`
+  INNER JOIN `estado` ON usuario.id_estado = estado.id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_sel_usuario_by_id` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_sel_usuario_by_id`(
+  IN `arg_Id` int
+)
+BEGIN
+	SELECT 
+     usuario.Id,
+    `Id_Cliente`,
+    `Id_TipoUsuario`,
+    `Usuario`,
+    `Password`,
+    `Rut`,
+    `Nombres`,
+    `Apellidos`,
+    `Correo`,
+    estado.descripcion AS Estado
+  FROM `usuario`
+  INNER JOIN `estado` ON usuario.id_estado = estado.id
+  WHERE usuario.Id = `arg_Id`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_upd_banco` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_upd_banco`(
+  IN `arg_Id` int,
+  IN `arg_EntidadBancaria` varchar(45)
+)
+BEGIN
+  UPDATE `banco` SET
+    `EntidadBancaria` = `arg_EntidadBancaria`
+  WHERE 
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_upd_cartola` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_upd_cartola`(
+  IN `arg_Id` int,
+  IN `arg_Id_CuentaBancaria` int,
+  IN `arg_CuentaCorriente` varchar(45),
+  IN `arg_NumeroCartola` int,
+  IN `arg_Moneda` int,
+  IN `arg_FechaDesde` date,
+  IN `arg_FechaHasta` date,
+  IN `arg_SaldoInicial` bigint,
+  IN `arg_Deposito` bigint,
+  IN `arg_OtrosAbonos` bigint,
+  IN `arg_Cheques` bigint,
+  IN `arg_OtrosCargos` bigint,
+  IN `arg_Impuestos` bigint,
+  IN `arg_SaldoFinal` bigint,
+  IN `arg_CreditoCupoAprobado` bigint,
+  IN `arg_CreditoMontoUtilizado` bigint,
+  IN `arg_CreditoSaldoDisponible` bigint,
+  IN `arg_TotalMovimientos` bigint,
+  IN `arg_Cuadratura` tinyint,
+  IN `arg_Archivo` blob
+)
+BEGIN
+  UPDATE `cartola` SET
+    `Id_CuentaBancaria` = `arg_Id_CuentaBancaria`,
+    `CuentaCorriente` = `arg_CuentaCorriente`,
+    `NumeroCartola` = `arg_NumeroCartola`,
+    `Moneda` = `arg_Moneda`,
+    `FechaDesde` = `arg_FechaDesde`,
+    `FechaHasta` = `arg_FechaHasta`,
+    `SaldoInicial` = `arg_SaldoInicial`,
+    `Deposito` = `arg_Deposito`,
+    `OtrosAbonos` = `arg_OtrosAbonos`,
+    `Cheques` = `arg_Cheques`,
+    `OtrosCargos` = `arg_OtrosCargos`,
+    `Impuestos` = `arg_Impuestos`,
+    `SaldoFinal` = `arg_SaldoFinal`,
+    `CreditoCupoAprobado` = `arg_CreditoCupoAprobado`,
+    `CreditoMontoUtilizado` = `arg_CreditoMontoUtilizado`,
+    `CreditoSaldoDisponible` = `arg_CreditoSaldoDisponible`,
+    `TotalMovimientos` = `arg_TotalMovimientos`,
+    `Cuadratura` = `arg_Cuadratura`,
+    `Archivo` = `arg_Archivo`
+  WHERE 
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_upd_cliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_upd_cliente`(
+  IN `arg_Id` int,
+  IN `arg_Rut` varchar(45),
+  IN `arg_Empresa` varchar(45)
+)
+BEGIN
+  DECLARE v_existe_cliente INT;
+  DECLARE v_existe_empresa INT;
+  DECLARE v_existe_rut INT;
+  DECLARE v_cliente_activo INT;
+  
+  SET v_existe_cliente = 0;
+  SET v_existe_empresa = 0;
+  SET v_existe_rut = 0;
+  SET v_cliente_activo = 0;
+  
+   /*Verificar si existe el id de cliente*/
+  SELECT COUNT(*) INTO v_existe_cliente FROM bankcolition.cliente WHERE Id = `arg_Id`;
+  
+  IF v_existe_cliente > 0 THEN
+	  /*Verificar si existe el nombre de empresa*/
+	  SELECT COUNT(*) INTO v_existe_empresa FROM bankcolition.cliente WHERE Empresa = `arg_Empresa`;
+	  
+	  /*Verificar si existe el rut*/
+	  SELECT COUNT(*) INTO v_existe_rut FROM bankcolition.cliente WHERE Rut = `arg_Rut`;
+      
+      /*Verificar si el cliente esta activo*/
+      SELECT id_estado INTO v_cliente_activo FROM bankcolition.cliente WHERE Id = `arg_Id`;
+      
+      IF v_cliente_activo != 1 THEN
+		SELECT "El cliente que intentas actualizar no esta activo" AS msg;
+	  ELSEIF v_existe_empresa > 0 THEN
+		SELECT "El nombre de empresa ya esta registrado" AS msg;
+	  ELSEIF v_existe_empresa > 0 THEN
+		SELECT "El rut ya esta registrado" AS msg;
+	  ELSE
+		  UPDATE `cliente` SET
+			`Rut` = `arg_Rut`,
+			`Empresa` = `arg_Empresa`
+		  WHERE 
+			(`Id` = `arg_Id`);
+	  END IF;
+	ELSE
+	   SELECT "El cliente que intentas actualizar no existe" as msg;
+  END IF;
+  
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_upd_conciliacionbancaria` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_upd_conciliacionbancaria`(
+  IN `arg_Id` int,
+  IN `arg_Id_CuentaBancaria` int,
+  IN `arg_Id_Cartola` int,
+  IN `arg_Id_MovimientoCartola` int,
+  IN `arg_Id_LibroDiario` int,
+  IN `arg_Id_MovimientoLibroDiario` int,
+  IN `arg_FechaDesde` date,
+  IN `arg_FechaHasta` date
+)
+BEGIN
+  UPDATE `conciliacionbancaria` SET
+    `Id_CuentaBancaria` = `arg_Id_CuentaBancaria`,
+    `Id_Cartola` = `arg_Id_Cartola`,
+    `Id_MovimientoCartola` = `arg_Id_MovimientoCartola`,
+    `Id_LibroDiario` = `arg_Id_LibroDiario`,
+    `Id_MovimientoLibroDiario` = `arg_Id_MovimientoLibroDiario`,
+    `FechaDesde` = `arg_FechaDesde`,
+    `FechaHasta` = `arg_FechaHasta`
+  WHERE 
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_upd_contrato` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_upd_contrato`(
+  IN `arg_Id` int,
+  IN `arg_Id_Cliente` int,
+  IN `arg_Contrato` varchar(45),
+  IN `arg_Descripcion` varchar(1000)
+)
+BEGIN
+  UPDATE `contrato` SET
+    `Id_Cliente` = `arg_Id_Cliente`,
+    `Contrato` = `arg_Contrato`,
+    `Descripcion` = `arg_Descripcion`
+  WHERE 
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_upd_cuentabancaria` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_upd_cuentabancaria`(
+  IN `arg_Id` int,
+  IN `arg_Id_Banco` int,
+  IN `arg_Id_TipoCuenta` int,
+  IN `arg_Rut` varchar(45),
+  IN `arg_Password` varchar(255),
+  IN `arg_NumeroCuenta` varchar(45)
+)
+BEGIN
+  DECLARE v_existe_id INT;
+  DECLARE v_existe_banco INT;
+  DECLARE v_existe_tipo_cuenta INT;
+  DECLARE v_existe_numero_cuenta INT;
+  
+  SET v_existe_id = 0;
+  SET v_existe_banco = 0;
+  SET v_existe_tipo_cuenta = 0;
+  SET v_existe_numero_cuenta = 0;
+  
+  /*Verificar si existe el id de la cuenta*/
+  SELECT COUNT(*) INTO v_existe_id FROM bankcolition.cuentabancaria WHERE Id = `arg_Id`;
+  
+  IF v_existe_id > 0 THEN
+	  /*Verificar si existe el banco*/
+	  SELECT COUNT(*) INTO v_existe_banco FROM bankcolition.banco WHERE Id = `arg_Id_Banco`;
+	  
+	  /*Verificar si existe el tipo de cuenta*/
+	  SELECT COUNT(*) INTO v_existe_tipo_cuenta FROM bankcolition.tipocuenta WHERE Id = `arg_Id_TipoCuenta`;
+	  
+	  /*Verificar si existe el numero de cuenta*/
+	  SELECT COUNT(*) INTO v_existe_numero_cuenta FROM bankcolition.cuentabancaria WHERE NumeroCuenta = `arg_NumeroCuenta`;
+	  
+	  IF (v_existe_banco = 0) THEN
+		SELECT "El banco al que tratas de asociar la cuenta no existe" AS msg;
+	  ELSEIF (v_existe_tipo_cuenta = 0) THEN
+		SELECT "El tipo de cuenta al que intentas asociar la cuenta no existe" AS msg;
+	  ELSEIF (v_existe_numero_cuenta > 0) THEN
+		SELECT "El numero de cuenta ya esta registrado" AS msg;
+	  ELSE
+		UPDATE `cuentabancaria` SET
+			`Id_Banco` = `arg_Id_Banco`,
+			`Id_TipoCuenta` = `arg_Id_TipoCuenta`,
+			`Rut` = `arg_Rut`,
+			`Password` = `arg_Password`,
+			`NumeroCuenta` = `arg_NumeroCuenta`
+	    WHERE 
+		(`Id` = `arg_Id`);
+	  END IF;
+  ELSE
+    SELECT "La cuenta bancaria que intentas actualizar no existe" as msg;  
+  END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_upd_librodiario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_upd_librodiario`(
+  IN `arg_Id` int,
+  IN `arg_Id_CuentaBancaria` int,
+  IN `arg_Moneda` int,
+  IN `arg_FechaDesde` date,
+  IN `arg_FechaHasta` date,
+  IN `arg_TotalMovimientos` bigint,
+  IN `arg_Saldo` bigint,
+  IN `arg_Cuadratura` tinyint,
+  IN `arg_Archivo` blob
+)
+BEGIN
+  UPDATE `librodiario` SET
+    `Id_CuentaBancaria` = `arg_Id_CuentaBancaria`,
+    `Moneda` = `arg_Moneda`,
+    `FechaDesde` = `arg_FechaDesde`,
+    `FechaHasta` = `arg_FechaHasta`,
+    `TotalMovimientos` = `arg_TotalMovimientos`,
+    `Saldo` = `arg_Saldo`,
+    `Cuadratura` = `arg_Cuadratura`,
+    `Archivo` = `arg_Archivo`
+  WHERE 
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_upd_movimientolibrodiario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_upd_movimientolibrodiario`(
+  IN `arg_Id` int,
+  IN `arg_Id_RegistrosCartola` int,
+  IN `arg_Monto` bigint,
+  IN `arg_Descripcion` varchar(45),
+  IN `arg_FechaMovimiento` date,
+  IN `arg_NumeroDocumento` bigint,
+  IN `arg_Sucursal` varchar(45),
+  IN `arg_CargoAbono` varchar(45)
+)
+BEGIN
+  UPDATE `movimientolibrodiario` SET
+    `Id_RegistrosCartola` = `arg_Id_RegistrosCartola`,
+    `Monto` = `arg_Monto`,
+    `Descripcion` = `arg_Descripcion`,
+    `FechaMovimiento` = `arg_FechaMovimiento`,
+    `NumeroDocumento` = `arg_NumeroDocumento`,
+    `Sucursal` = `arg_Sucursal`,
+    `CargoAbono` = `arg_CargoAbono`
+  WHERE 
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_upd_movimientoscartola` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_upd_movimientoscartola`(
+  IN `arg_Id` int,
+  IN `arg_Id_Cartola` int,
+  IN `arg_Monto` bigint,
+  IN `arg_Descripcion` varchar(45),
+  IN `arg_FechaMovimiento` date,
+  IN `arg_NumeroDocumento` bigint,
+  IN `arg_Sucursal` varchar(45),
+  IN `arg_CargoAbono` varchar(45)
+)
+BEGIN
+  UPDATE `movimientoscartola` SET
+    `Id_Cartola` = `arg_Id_Cartola`,
+    `Monto` = `arg_Monto`,
+    `Descripcion` = `arg_Descripcion`,
+    `FechaMovimiento` = `arg_FechaMovimiento`,
+    `NumeroDocumento` = `arg_NumeroDocumento`,
+    `Sucursal` = `arg_Sucursal`,
+    `CargoAbono` = `arg_CargoAbono`
+  WHERE 
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_upd_movimientoscliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_upd_movimientoscliente`(
+  IN `arg_Id` int,
+  IN `arg_Id_RegistrosCartola` int,
+  IN `arg_Monto` bigint,
+  IN `arg_Descripcion` varchar(45),
+  IN `arg_FechaMovimiento` date,
+  IN `arg_NumeroDocumento` bigint,
+  IN `arg_Sucursal` varchar(45),
+  IN `arg_CargoAbono` varchar(45)
+)
+BEGIN
+  UPDATE `movimientoscliente` SET
+    `Id_RegistrosCartola` = `arg_Id_RegistrosCartola`,
+    `Monto` = `arg_Monto`,
+    `Descripcion` = `arg_Descripcion`,
+    `FechaMovimiento` = `arg_FechaMovimiento`,
+    `NumeroDocumento` = `arg_NumeroDocumento`,
+    `Sucursal` = `arg_Sucursal`,
+    `CargoAbono` = `arg_CargoAbono`
+  WHERE 
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_upd_registroscliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_upd_registroscliente`(
+  IN `arg_Id` int,
+  IN `arg_Id_CuentaBancaria` int,
+  IN `arg_Moneda` int,
+  IN `arg_FechaDesde` date,
+  IN `arg_FechaHasta` date,
+  IN `arg_TotalMovimientos` bigint,
+  IN `arg_Saldo` bigint,
+  IN `arg_Cuadratura` tinyint,
+  IN `arg_Archivo` blob
+)
+BEGIN
+  UPDATE `registroscliente` SET
+    `Id_CuentaBancaria` = `arg_Id_CuentaBancaria`,
+    `Moneda` = `arg_Moneda`,
+    `FechaDesde` = `arg_FechaDesde`,
+    `FechaHasta` = `arg_FechaHasta`,
+    `TotalMovimientos` = `arg_TotalMovimientos`,
+    `Saldo` = `arg_Saldo`,
+    `Cuadratura` = `arg_Cuadratura`,
+    `Archivo` = `arg_Archivo`
+  WHERE 
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_upd_tipocuenta` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_upd_tipocuenta`(
+  IN `arg_Id` int,
+  IN `arg_Descripcion` varchar(45)
+)
+BEGIN
+  UPDATE `tipocuenta` SET
+    `Descripcion` = `arg_Descripcion`
+  WHERE 
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_upd_tipousuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_upd_tipousuario`(
+  IN `arg_Id` int,
+  IN `arg_Descripcion` varchar(45)
+)
+BEGIN
+  UPDATE `tipousuario` SET
+    `Descripcion` = `arg_Descripcion`
+  WHERE 
+    (`Id` = `arg_Id`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_upd_usuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_upd_usuario`(
+  IN `arg_Id` int,
+  IN `arg_Usuario` varchar(45),
+  IN `arg_Password` varchar(45),
+  IN `arg_Rut` varchar(45),
+  IN `arg_Nombres` varchar(45),
+  IN `arg_Apellidos` varchar(45),
+  IN `arg_Correo` varchar(100)
+)
+BEGIN
+  DECLARE v_existe_id INT;
+  DECLARE v_existe_usuario INT;
+  DECLARE v_existe_rut INT;
+  DECLARE v_existe_correo INT;
+  DECLARE v_usuario_activo INT;
+  
+  SET v_existe_id = 0;
+  SET v_existe_usuario = 0;
+  SET v_existe_rut = 0;
+  SET v_existe_correo = 0;
+  SET v_usuario_activo = 0;
+  
+  /*Verificar si existe el id de usuario*/
+  SELECT COUNT(*) INTO v_existe_id FROM bankcolition.usuario WHERE Id = `arg_Id`;
+  
+  IF v_existe_id > 0 THEN
+	   /*Verificar si existe el nombre de usuario*/
+	  SELECT COUNT(*) INTO v_existe_usuario FROM bankcolition.usuario WHERE Usuario = `arg_Usuario`;
+	  
+	  /*Verificar si existe el rut*/
+	  SELECT COUNT(*) INTO v_existe_rut FROM bankcolition.usuario WHERE Rut = `arg_Rut`;
+	  
+	  /*Verificar si existe el correo*/
+	  SELECT COUNT(*) INTO v_existe_correo FROM bankcolition.usuario WHERE Correo = `arg_Correo`;
+      
+      /*Verificar si el usuario esta activo*/
+      SELECT id_estado INTO v_usuario_activo FROM bankcolition.usuario WHERE Id = `arg_Id`;
+      
+       IF (v_usuario_activo != 1) THEN
+			SELECT "El usuario que intentas actualizar no esta activo" AS msg;
+		  ELSEIF (v_existe_rut > 0) THEN
+			SELECT "El rut ya esta registrado en la base de datos" AS msg;
+		  ELSEIF (v_existe_usuario > 0) THEN
+			SELECT "El nombre de usuario ya existe" AS msg;
+		  ELSEIF (v_existe_correo > 0) THEN
+			SELECT "El correo ya esta registrado en la base de datos" AS msg;
+		  ELSE
+           UPDATE `usuario` SET
+			`Usuario` = `arg_Usuario`,
+			`Password` = `arg_Password`,
+			`Rut` = `arg_Rut`,
+			`Nombres` = `arg_Nombres`,
+			`Apellidos` = `arg_Apellidos`,
+			`Correo` = `arg_Correo`
+		  WHERE 
+			(`Id` = `arg_Id`);
+      END IF;
+  ELSE
+    SELECT "El usuario que intentas actualizar no existe" as msg;  
+  END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_ValidarUsuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ValidarUsuario`(
+	IN `arg_Usuario` varchar(100),	 
+	IN `arg_Password` varchar(100)
+)
+BEGIN
+	SELECT u.`Id` usuarioId, u.`Id_Cliente` clienteId, u.Nombres nombres, u.Apellidos apellidos, tu.Descripcion rol, u.`Password` pass
+	FROM bankcolition.usuario u
+	LEFT JOIN bankcolition.tipousuario tu ON u.Id_TipoUsuario = tu.Id 
+	WHERE 	u.`Id_TipoUsuario` != 0
+		AND u.`Usuario` = `arg_Usuario`
+		/*AND u.`Password` = `arg_Password`*/
+		AND u.`id_estado` = 1;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -517,4 +3466,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-25  2:31:08
+-- Dump completed on 2022-07-25 21:07:43
