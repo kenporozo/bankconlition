@@ -2,7 +2,7 @@ import mysql.connector
 
 hostname = 'localhost'
 username = 'root'
-password = 'root'
+password = 'admin'
 database = 'bankcolition'
 
 def getCuentasBancarias() -> dict:
