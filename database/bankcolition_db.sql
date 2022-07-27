@@ -264,16 +264,16 @@ CREATE TABLE `librodiario` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `Id_CuentaBancaria` int NOT NULL,
   `Moneda` varchar(45) DEFAULT NULL,
-  `FechaDesde` date NOT NULL,
-  `FechaHasta` date NOT NULL,
+  `FechaDesde` date DEFAULT NULL,
+  `FechaHasta` date DEFAULT NULL,
   `TotalMovimientos` bigint DEFAULT NULL,
-  `Saldo` bigint NOT NULL,
-  `Cuadratura` tinyint(1) NOT NULL,
+  `Saldo` bigint DEFAULT NULL,
+  `Cuadratura` tinyint(1) DEFAULT NULL,
   `Archivo` blob,
   PRIMARY KEY (`Id`),
   KEY `Id_CuentaBancaria` (`Id_CuentaBancaria`),
   CONSTRAINT `librodiario_ibfk_1` FOREIGN KEY (`Id_CuentaBancaria`) REFERENCES `cuentabancaria` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -282,7 +282,7 @@ CREATE TABLE `librodiario` (
 
 LOCK TABLES `librodiario` WRITE;
 /*!40000 ALTER TABLE `librodiario` DISABLE KEYS */;
-INSERT INTO `librodiario` VALUES (1,1,'1','2022-03-16','2022-05-16',1,1,1,NULL);
+INSERT INTO `librodiario` VALUES (1,1,'1','2022-03-16','2022-05-16',1,1,1,NULL),(2,1,'Peso Chileno','2022-07-21',NULL,9,NULL,0,NULL),(3,1,'Peso Chileno','2022-07-21',NULL,9,NULL,0,NULL),(4,1,'Peso Chileno','2022-07-21',NULL,9,NULL,0,NULL),(5,1,'Peso Chileno','2022-07-21',NULL,9,NULL,0,NULL),(6,1,'Peso Chileno','2022-07-21',NULL,9,NULL,0,NULL),(7,1,'Peso Chileno','2022-07-21',NULL,9,NULL,0,NULL),(8,1,'Peso Chileno','2022-07-21','2022-07-22',9,NULL,0,NULL);
 /*!40000 ALTER TABLE `librodiario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -296,16 +296,16 @@ DROP TABLE IF EXISTS `movimientolibrodiario`;
 CREATE TABLE `movimientolibrodiario` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `Id_LibroDiario` int NOT NULL,
-  `Monto` bigint NOT NULL,
+  `Monto` bigint DEFAULT NULL,
   `Descripcion` varchar(45) DEFAULT NULL,
-  `FechaMovimiento` date NOT NULL,
-  `NumeroDocumento` bigint NOT NULL,
+  `FechaMovimiento` date DEFAULT NULL,
+  `NumeroDocumento` bigint DEFAULT NULL,
   `Sucursal` varchar(45) DEFAULT NULL,
   `CargoAbono` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`Id`),
   KEY `movimientolibrodiario_ibfk_1` (`Id_LibroDiario`),
   CONSTRAINT `movimientolibrodiario_ibfk_1` FOREIGN KEY (`Id_LibroDiario`) REFERENCES `librodiario` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -314,7 +314,7 @@ CREATE TABLE `movimientolibrodiario` (
 
 LOCK TABLES `movimientolibrodiario` WRITE;
 /*!40000 ALTER TABLE `movimientolibrodiario` DISABLE KEYS */;
-INSERT INTO `movimientolibrodiario` VALUES (1,1,1,'1','2022-05-16',1,'1','C'),(2,1,2,'1','2022-05-16',2,'1','C');
+INSERT INTO `movimientolibrodiario` VALUES (1,1,1,'1','2022-05-16',1,'1','C'),(2,1,2,'1','2022-05-16',2,'1','C'),(3,8,-4740000,'2689142 CHEQUE DEVUELTO NUMERO','2022-07-22',0,'OPER. CENTRALES','C'),(4,8,-3471744,'Pago de Provee','2022-07-22',191421721,'OPER. CENTRALES','C'),(5,8,92368904,'Depósito con Vales Vista','2022-07-22',0,'Encomender','A'),(6,8,87330506,'0965696008 P.PROVEEDOR CAMERON','2022-07-22',0,'G.Finanzas','A'),(7,8,84250786,'0965670408 P.PROVEEDOR CIA MIN','2022-07-22',0,'G.Finanzas','A'),(8,8,67386752,'091755000K P.PROVEEDOR CEMENTO','2022-07-22',0,'G.Finanzas','A'),(9,8,63183367,'Depósito con Vales Vista','2022-07-22',0,'Encomender','A'),(10,8,62832000,'0760099260 P.PROVEEDOR MINETEC','2022-07-22',0,'G.Finanzas','A'),(11,8,58139471,'0765363535 P.PROVEEDOR Enel Ch','2022-07-22',0,'G.Finanzas','A');
 /*!40000 ALTER TABLE `movimientolibrodiario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1424,28 +1424,19 @@ CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ins_librodiario`(
   IN `arg_Archivo` blob
 )
 BEGIN
-  INSERT INTO `librodiario`
-  (
-    `Id_CuentaBancaria`,
-    `Moneda`,
-    `FechaDesde`,
-    `FechaHasta`,
-    `TotalMovimientos`,
-    `Saldo`,
-    `Cuadratura`,
-    `Archivo`
-  )
-  VALUES 
-  (
-    `arg_Id_CuentaBancaria`,
-    `arg_Moneda`,
-    `arg_FechaDesde`,
-    `arg_FechaHasta`,
-    `arg_TotalMovimientos`,
-    `arg_Saldo`,
-    `arg_Cuadratura`,
-    `arg_Archivo`
-  );
+	DECLARE Id_LibroDiario INT;
+
+	select ID into Id_LibroDiario from librodiario where Id_CuentaBancaria = arg_Id_CuentaBancaria and FechaDesde = arg_FechaDesde and FechaHasta = arg_FechaHasta;	
+                
+	IF Id_LibroDiario is null or Id_LibroDiario < 1 Then                
+	  INSERT INTO `librodiario`
+		(`Id_CuentaBancaria`,`Moneda`,`FechaDesde`,`FechaHasta`,`TotalMovimientos`,`Saldo`,`Cuadratura`,`Archivo`)
+	  VALUES 
+		(`arg_Id_CuentaBancaria`,`arg_Moneda`,`arg_FechaDesde`,`arg_FechaHasta`,`arg_TotalMovimientos`,`arg_Saldo`,`arg_Cuadratura`,`arg_Archivo`);
+	end if;
+    
+    #select max(ID) into Id_LibroDiario from librodiario where Id_CuentaBancaria = arg_Id_CuentaBancaria and FechaDesde = arg_FechaDesde and FechaHasta = arg_FechaHasta group by ID;	
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1463,7 +1454,7 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ins_movimientolibrodiario`(
-  IN `arg_Id_RegistrosCartola` int,
+  IN `arg_Id_LibroDiario` int,
   IN `arg_Monto` bigint,
   IN `arg_Descripcion` varchar(45),
   IN `arg_FechaMovimiento` date,
@@ -1472,9 +1463,10 @@ CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ins_movimientolibrodiario`(
   IN `arg_CargoAbono` varchar(45)
 )
 BEGIN
+  DELETE FROM `movimientolibrodiario` where Id_LibroDiario = arg_Id_LibroDiario;
   INSERT INTO `movimientolibrodiario`
   (
-    `Id_RegistrosCartola`,
+    `Id_LibroDiario`,
     `Monto`,
     `Descripcion`,
     `FechaMovimiento`,
@@ -1492,6 +1484,7 @@ BEGIN
     `arg_Sucursal`,
     `arg_CargoAbono`
   );
+  commit;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1531,52 +1524,6 @@ BEGIN
   VALUES 
   (
     `arg_Id_Cartola`,
-    `arg_Monto`,
-    `arg_Descripcion`,
-    `arg_FechaMovimiento`,
-    `arg_NumeroDocumento`,
-    `arg_Sucursal`,
-    `arg_CargoAbono`
-  );
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_ins_movimientoscliente` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_ins_movimientoscliente`(
-  IN `arg_Id_RegistrosCartola` int,
-  IN `arg_Monto` bigint,
-  IN `arg_Descripcion` varchar(45),
-  IN `arg_FechaMovimiento` date,
-  IN `arg_NumeroDocumento` bigint,
-  IN `arg_Sucursal` varchar(45),
-  IN `arg_CargoAbono` varchar(45)
-)
-BEGIN
-  INSERT INTO `movimientoscliente`
-  (
-    `Id_RegistrosCartola`,
-    `Monto`,
-    `Descripcion`,
-    `FechaMovimiento`,
-    `NumeroDocumento`,
-    `Sucursal`,
-    `CargoAbono`
-  )
-  VALUES 
-  (
-    `arg_Id_RegistrosCartola`,
     `arg_Monto`,
     `arg_Descripcion`,
     `arg_FechaMovimiento`,
@@ -1934,6 +1881,98 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_jsonLibroDiario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_jsonLibroDiario`(
+	in pId_Cliente int,
+    in pId_CuentaBancaria int,
+    IN pParametroJson    JSON
+)
+BEGIN 
+    DECLARE vJsonEsValido INT;
+    DECLARE vItems INT;
+    DECLARE vIndex BIGINT UNSIGNED DEFAULT 0;
+    DECLARE vId_LibroDiario INT;
+    
+    # Variables para parseo del objeto JSON
+	DECLARE vCampo1 varchar(45);
+	DECLARE vCampo2 date;
+	DECLARE vCampo3 date;
+	DECLARE vCampo4 bigint;
+	DECLARE vCampo5 varchar(45);
+	DECLARE vCampo6 date;
+	DECLARE vCampo7 bigint;
+	DECLARE vCampo8 varchar(45);
+	DECLARE vCampo9 varchar(45);
+
+    
+    SET vJsonEsValido = JSON_VALID(pParametroJson);
+    
+    IF vJsonEsValido = 0 THEN 
+        # El objeto JSON no es válido, salimos prematuramente
+        SELECT "JSON suministrado no es válido";
+    ELSE 
+        # Nuestro objeto es válido, podemos proceder
+        SET vItems = JSON_LENGTH(pParametroJson);
+        
+        #Select vItems, pParametroJson;
+        
+        # El objeto es válido y contiene al menos un elemento
+        IF vItems > 0 THEN 
+			SET vCampo1 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].CuentaCorriente')));
+			SET vCampo2 = str_to_date(JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].FechaDesde'))),'%d-%m-%Y');
+			SET vCampo3 = str_to_date(JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].FechaHasta'))),'%d-%m-%Y');
+			
+			select ID into vId_LibroDiario from `bankcolition`.`librodiario` WHERE `Id_CuentaBancaria` = pId_CuentaBancaria AND `FechaDesde` = vCampo2 and `FechaHasta` = vCampo3;	
+                
+			IF vId_LibroDiario is null or vId_LibroDiario < 1 Then    
+                INSERT INTO `bankcolition`.`librodiario`
+					(`Id_CuentaBancaria`,`Moneda`,`FechaDesde`,`FechaHasta`,`TotalMovimientos`,`Saldo`,`Cuadratura`,`Archivo`)
+					VALUES (pId_CuentaBancaria, 'Peso Chileno', vCampo2, vCampo3, vItems, null, False, null);
+				select ID into vId_LibroDiario from librodiario where Id_CuentaBancaria = pId_CuentaBancaria and FechaDesde = vCampo2 and FechaHasta = vCampo3;	
+			ELSE
+				UPDATE `bankcolition`.`cartola`
+					SET
+					`TotalMovimientos` = vItems,
+					`Cuadratura` = False
+					WHERE `Id` = vId_LibroDiario;
+			END IF;
+            
+			DELETE FROM `movimientolibrodiario` where Id_LibroDiario = vId_LibroDiario;
+            
+            WHILE vIndex < vItems DO
+				
+				SET vCampo4 = REPLACE(JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Monto'))),'.','');
+				SET vCampo5 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Descripcion')));
+				SET vCampo6 = str_to_date(JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Fecha'))),'%d-%m-%Y');
+				SET vCampo7 = REPLACE(JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].NoDocumento'))),'.','');
+				SET vCampo8 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Sucursal')));
+				SET vCampo9 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Cargo')));
+
+				INSERT INTO `bankcolition`.`movimientolibrodiario`
+					(`Id_LibroDiario`,`Monto`,`Descripcion`,`FechaMovimiento`,`NumeroDocumento`,`Sucursal`,`CargoAbono`)
+					VALUES (vId_LibroDiario, vCampo4, vCampo5, vCampo6, vCampo7, vCampo8, vCampo9);					
+							
+				SET vIndex = vIndex + 1;                    
+            END WHILE;
+            
+        END IF;
+    END IF;
+    COMMIT;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_jsonMovimientosCartola` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -2015,6 +2054,37 @@ BEGIN
             
         END IF;
     END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_jsonTest` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_jsonTest`(
+	IN pParametroJson    JSON
+)
+BEGIN 
+    DECLARE vJsonEsValido INT;
+       
+    SET vJsonEsValido = JSON_VALID(pParametroJson);
+    
+    IF vJsonEsValido = 0 THEN 
+        # El objeto JSON no es válido, salimos prematuramente
+        SELECT "JSON suministrado no es válido";
+    ELSE 
+        # Nuestro objeto es válido, podemos proceder
+        Select JSON_LENGTH(pParametroJson);
+	END IF;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -3466,4 +3536,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-25 21:07:43
+-- Dump completed on 2022-07-26  4:04:15
