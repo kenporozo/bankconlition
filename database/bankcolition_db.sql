@@ -138,17 +138,17 @@ CREATE TABLE `conciliacionbancaria` (
   KEY `conciliacionbancaria_ibfk_6_idx` (`Id_Cliente`),
   KEY `conciliacionbancaria_ibfk_1` (`Id_MovimientoLibroDiario`),
   KEY `conciliacionbancaria_ibfk_2` (`Id_MovimientoCartola`),
-  KEY `conciliacionbancaria_ibfk_4` (`Id_Cartola`),
-  KEY `conciliacionbancaria_ibfk_5` (`Id_LibroDiario`),
   KEY `conciliacionbancaria_ibfk_7_idx` (`Id_Estado`),
+  KEY `conciliacionbancaria_ibfk_5_idx` (`Id_Cartola`),
+  KEY `conciliacionbancaria_ibfk_4` (`Id_LibroDiario`),
   CONSTRAINT `conciliacionbancaria_ibfk_1` FOREIGN KEY (`Id_MovimientoLibroDiario`) REFERENCES `movimientolibrodiario` (`Id`),
   CONSTRAINT `conciliacionbancaria_ibfk_2` FOREIGN KEY (`Id_MovimientoCartola`) REFERENCES `movimientoscartola` (`Id`),
   CONSTRAINT `conciliacionbancaria_ibfk_3` FOREIGN KEY (`Id_CuentaBancaria`) REFERENCES `cuentabancaria` (`Id`),
-  CONSTRAINT `conciliacionbancaria_ibfk_4` FOREIGN KEY (`Id_Cartola`) REFERENCES `librodiario` (`Id`),
-  CONSTRAINT `conciliacionbancaria_ibfk_5` FOREIGN KEY (`Id_LibroDiario`) REFERENCES `cartola` (`Id`),
+  CONSTRAINT `conciliacionbancaria_ibfk_4` FOREIGN KEY (`Id_LibroDiario`) REFERENCES `librodiario` (`Id`),
+  CONSTRAINT `conciliacionbancaria_ibfk_5` FOREIGN KEY (`Id_Cartola`) REFERENCES `cartola` (`Id`),
   CONSTRAINT `conciliacionbancaria_ibfk_6` FOREIGN KEY (`Id_Cliente`) REFERENCES `cliente` (`Id`),
   CONSTRAINT `conciliacionbancaria_ibfk_7` FOREIGN KEY (`Id_Estado`) REFERENCES `estado` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=256 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,7 +157,7 @@ CREATE TABLE `conciliacionbancaria` (
 
 LOCK TABLES `conciliacionbancaria` WRITE;
 /*!40000 ALTER TABLE `conciliacionbancaria` DISABLE KEYS */;
-INSERT INTO `conciliacionbancaria` VALUES (1,2,1,1,1,1,1,'2022-05-16',3),(2,2,1,1,2,NULL,NULL,'2022-05-16',6),(3,2,1,NULL,NULL,1,2,'2022-05-16',5);
+INSERT INTO `conciliacionbancaria` VALUES (1,2,1,23,6110,NULL,NULL,'2022-07-22',6),(2,2,1,23,6111,NULL,NULL,'2022-07-22',6),(3,2,1,23,6112,NULL,NULL,'2022-07-22',6),(4,2,1,23,6113,NULL,NULL,'2022-07-22',6),(5,2,1,23,6114,NULL,NULL,'2022-07-22',6),(6,2,1,23,6115,NULL,NULL,'2022-07-22',6),(7,2,1,23,6116,NULL,NULL,'2022-07-22',6),(8,2,1,23,6117,NULL,NULL,'2022-07-22',6),(9,2,1,23,6118,NULL,NULL,'2022-07-22',6),(10,2,1,23,6119,NULL,NULL,'2022-07-22',6),(11,2,1,23,6120,NULL,NULL,'2022-07-22',6),(12,2,1,23,6121,NULL,NULL,'2022-07-22',6),(13,2,1,23,6122,NULL,NULL,'2022-07-22',6),(14,2,1,23,6123,NULL,NULL,'2022-07-22',6),(15,2,1,23,6124,NULL,NULL,'2022-07-22',6),(16,2,1,23,6125,NULL,NULL,'2022-07-22',6),(17,2,1,23,6126,NULL,NULL,'2022-07-22',6),(18,2,1,23,6127,NULL,NULL,'2022-07-22',6),(19,2,1,23,6128,NULL,NULL,'2022-07-22',6),(20,2,1,23,6129,NULL,NULL,'2022-07-22',6),(21,2,1,23,6130,NULL,NULL,'2022-07-22',6),(22,2,1,23,6131,NULL,NULL,'2022-07-22',6),(23,2,1,23,6132,NULL,NULL,'2022-07-22',6),(24,2,1,23,6133,NULL,NULL,'2022-07-22',6),(25,2,1,23,6134,NULL,NULL,'2022-07-22',6),(26,2,1,23,6135,NULL,NULL,'2022-07-22',6),(27,2,1,23,6136,NULL,NULL,'2022-07-22',6),(28,2,1,23,6137,NULL,NULL,'2022-07-22',6),(29,2,1,23,6138,NULL,NULL,'2022-07-22',6),(30,2,1,23,6139,NULL,NULL,'2022-07-22',6),(31,2,1,23,6140,NULL,NULL,'2022-07-22',6),(32,2,1,23,6141,NULL,NULL,'2022-07-22',6),(33,2,1,23,6142,8,111,'2022-07-22',3),(34,2,1,23,6143,8,112,'2022-07-22',3),(35,2,1,23,6144,NULL,NULL,'2022-07-22',6),(36,2,1,23,6145,NULL,NULL,'2022-07-22',6),(37,2,1,23,6146,NULL,NULL,'2022-07-22',6),(38,2,1,23,6147,NULL,NULL,'2022-07-22',6),(39,2,1,23,6148,NULL,NULL,'2022-07-22',6),(40,2,1,23,6149,NULL,NULL,'2022-07-22',6),(41,2,1,23,6150,NULL,NULL,'2022-07-22',6),(42,2,1,23,6151,NULL,NULL,'2022-07-22',6),(43,2,1,23,6152,NULL,NULL,'2022-07-22',6),(44,2,1,23,6153,NULL,NULL,'2022-07-22',6),(45,2,1,23,6154,NULL,NULL,'2022-07-22',6),(46,2,1,23,6155,NULL,NULL,'2022-07-22',6),(47,2,1,23,6156,NULL,NULL,'2022-07-22',6),(48,2,1,23,6157,NULL,NULL,'2022-07-22',6),(49,2,1,23,6158,NULL,NULL,'2022-07-22',6),(50,2,1,23,6159,NULL,NULL,'2022-07-22',6),(51,2,1,23,6160,NULL,NULL,'2022-07-22',6),(52,2,1,23,6161,NULL,NULL,'2022-07-22',6),(53,2,1,23,6162,NULL,NULL,'2022-07-22',6),(54,2,1,23,6163,NULL,NULL,'2022-07-22',6),(55,2,1,23,6164,NULL,NULL,'2022-07-22',6),(56,2,1,23,6165,NULL,NULL,'2022-07-22',6),(57,2,1,23,6166,8,113,'2022-07-22',3),(58,2,1,23,6167,8,114,'2022-07-22',3),(59,2,1,23,6168,8,115,'2022-07-22',3),(60,2,1,23,6169,8,116,'2022-07-22',3),(61,2,1,23,6170,8,117,'2022-07-22',3),(62,2,1,23,6171,8,118,'2022-07-22',3),(63,2,1,23,6172,8,119,'2022-07-22',3),(64,2,1,23,6173,NULL,NULL,'2022-07-22',6),(65,2,1,23,6174,NULL,NULL,'2022-07-22',6),(66,2,1,23,6175,NULL,NULL,'2022-07-22',6),(67,2,1,23,6176,NULL,NULL,'2022-07-22',6),(68,2,1,23,6177,NULL,NULL,'2022-07-22',6),(69,2,1,23,6178,NULL,NULL,'2022-07-22',6),(70,2,1,23,6179,NULL,NULL,'2022-07-22',6),(71,2,1,23,6180,NULL,NULL,'2022-07-22',6),(72,2,1,23,6181,NULL,NULL,'2022-07-22',6),(73,2,1,23,6182,NULL,NULL,'2022-07-22',6),(74,2,1,23,6183,NULL,NULL,'2022-07-22',6),(75,2,1,23,6184,NULL,NULL,'2022-07-22',6),(76,2,1,23,6185,NULL,NULL,'2022-07-22',6),(77,2,1,23,6186,NULL,NULL,'2022-07-22',6),(78,2,1,23,6187,NULL,NULL,'2022-07-22',6),(79,2,1,23,6188,NULL,NULL,'2022-07-22',6),(80,2,1,23,6189,NULL,NULL,'2022-07-22',6),(81,2,1,23,6190,NULL,NULL,'2022-07-22',6),(82,2,1,23,6191,NULL,NULL,'2022-07-22',6),(83,2,1,23,6192,NULL,NULL,'2022-07-22',6),(84,2,1,23,6193,NULL,NULL,'2022-07-22',6),(85,2,1,23,6194,NULL,NULL,'2022-07-22',6),(86,2,1,23,6195,NULL,NULL,'2022-07-22',6),(87,2,1,23,6196,NULL,NULL,'2022-07-22',6),(88,2,1,23,6197,NULL,NULL,'2022-07-22',6),(89,2,1,23,6198,NULL,NULL,'2022-07-22',6),(90,2,1,23,6199,NULL,NULL,'2022-07-22',6),(91,2,1,23,6200,NULL,NULL,'2022-07-22',6),(92,2,1,23,6201,NULL,NULL,'2022-07-22',6),(93,2,1,23,6202,NULL,NULL,'2022-07-22',6),(94,2,1,23,6203,NULL,NULL,'2022-07-22',6),(95,2,1,23,6204,NULL,NULL,'2022-07-22',6),(96,2,1,23,6205,NULL,NULL,'2022-07-22',6),(97,2,1,23,6206,NULL,NULL,'2022-07-22',6),(98,2,1,23,6207,NULL,NULL,'2022-07-22',6),(99,2,1,23,6208,NULL,NULL,'2022-07-22',6),(100,2,1,23,6209,NULL,NULL,'2022-07-22',6),(101,2,1,23,6210,NULL,NULL,'2022-07-22',6),(102,2,1,23,6211,NULL,NULL,'2022-07-22',6),(103,2,1,23,6212,NULL,NULL,'2022-07-22',6),(104,2,1,23,6213,NULL,NULL,'2022-07-22',6),(105,2,1,23,6214,NULL,NULL,'2022-07-22',6),(106,2,1,23,6215,NULL,NULL,'2022-07-22',6),(107,2,1,23,6216,NULL,NULL,'2022-07-22',6),(108,2,1,23,6217,NULL,NULL,'2022-07-22',6),(109,2,1,23,6218,NULL,NULL,'2022-07-22',6),(110,2,1,23,6219,NULL,NULL,'2022-07-22',6),(111,2,1,23,6220,NULL,NULL,'2022-07-22',6),(112,2,1,23,6221,NULL,NULL,'2022-07-22',6),(113,2,1,23,6222,NULL,NULL,'2022-07-22',6),(114,2,1,23,6223,NULL,NULL,'2022-07-22',6),(115,2,1,23,6224,NULL,NULL,'2022-07-22',6),(116,2,1,23,6225,NULL,NULL,'2022-07-22',6),(117,2,1,23,6226,NULL,NULL,'2022-07-22',6),(118,2,1,23,6227,NULL,NULL,'2022-07-22',6),(119,2,1,23,6228,NULL,NULL,'2022-07-22',6),(120,2,1,23,6229,NULL,NULL,'2022-07-22',6),(121,2,1,23,6230,NULL,NULL,'2022-07-22',6),(122,2,1,23,6231,NULL,NULL,'2022-07-22',6),(123,2,1,23,6232,NULL,NULL,'2022-07-22',6),(124,2,1,23,6233,NULL,NULL,'2022-07-22',6),(125,2,1,23,6234,NULL,NULL,'2022-07-22',6),(126,2,1,23,6235,NULL,NULL,'2022-07-22',6),(127,2,1,23,6236,NULL,NULL,'2022-07-22',6),(128,2,1,23,6237,NULL,NULL,'2022-07-22',6),(129,2,1,23,6238,NULL,NULL,'2022-07-22',6),(130,2,1,23,6239,NULL,NULL,'2022-07-22',6),(131,2,1,23,6240,NULL,NULL,'2022-07-22',6),(132,2,1,23,6241,NULL,NULL,'2022-07-22',6),(133,2,1,23,6242,NULL,NULL,'2022-07-22',6),(134,2,1,23,6243,NULL,NULL,'2022-07-22',6),(135,2,1,23,6244,NULL,NULL,'2022-07-22',6),(136,2,1,23,6245,NULL,NULL,'2022-07-22',6),(137,2,1,23,6246,NULL,NULL,'2022-07-22',6),(138,2,1,23,6247,NULL,NULL,'2022-07-22',6),(139,2,1,23,6248,NULL,NULL,'2022-07-22',6),(140,2,1,23,6249,NULL,NULL,'2022-07-22',6),(141,2,1,23,6250,NULL,NULL,'2022-07-22',6),(142,2,1,23,6251,NULL,NULL,'2022-07-22',6),(143,2,1,23,6252,NULL,NULL,'2022-07-22',6),(144,2,1,23,6253,NULL,NULL,'2022-07-22',6),(145,2,1,23,6254,NULL,NULL,'2022-07-22',6),(146,2,1,23,6255,NULL,NULL,'2022-07-22',6),(147,2,1,23,6256,NULL,NULL,'2022-07-22',6),(148,2,1,23,6257,NULL,NULL,'2022-07-22',6),(149,2,1,23,6258,NULL,NULL,'2022-07-22',6),(150,2,1,23,6259,NULL,NULL,'2022-07-22',6),(151,2,1,23,6260,NULL,NULL,'2022-07-22',6),(152,2,1,23,6261,NULL,NULL,'2022-07-22',6),(153,2,1,23,6262,NULL,NULL,'2022-07-22',6),(154,2,1,23,6263,NULL,NULL,'2022-07-22',6),(155,2,1,23,6264,NULL,NULL,'2022-07-22',6),(156,2,1,23,6265,NULL,NULL,'2022-07-22',6),(157,2,1,23,6266,NULL,NULL,'2022-07-22',6),(158,2,1,23,6267,NULL,NULL,'2022-07-22',6),(159,2,1,23,6268,NULL,NULL,'2022-07-22',6),(160,2,1,23,6269,NULL,NULL,'2022-07-22',6),(161,2,1,23,6270,NULL,NULL,'2022-07-22',6),(162,2,1,23,6271,NULL,NULL,'2022-07-22',6),(163,2,1,23,6272,NULL,NULL,'2022-07-22',6),(164,2,1,23,6273,NULL,NULL,'2022-07-22',6),(165,2,1,23,6274,NULL,NULL,'2022-07-22',6),(166,2,1,23,6275,NULL,NULL,'2022-07-22',6),(167,2,1,23,6276,NULL,NULL,'2022-07-22',6),(168,2,1,23,6277,NULL,NULL,'2022-07-22',6),(169,2,1,23,6278,NULL,NULL,'2022-07-22',6),(170,2,1,23,6279,NULL,NULL,'2022-07-22',6),(171,2,1,23,6280,NULL,NULL,'2022-07-22',6),(172,2,1,23,6281,NULL,NULL,'2022-07-22',6),(173,2,1,23,6282,NULL,NULL,'2022-07-22',6),(174,2,1,23,6283,NULL,NULL,'2022-07-22',6),(175,2,1,23,6284,NULL,NULL,'2022-07-22',6),(176,2,1,23,6285,NULL,NULL,'2022-07-22',6),(177,2,1,23,6286,NULL,NULL,'2022-07-22',6),(178,2,1,23,6287,NULL,NULL,'2022-07-22',6),(179,2,1,23,6288,NULL,NULL,'2022-07-22',6),(180,2,1,23,6289,NULL,NULL,'2022-07-22',6),(181,2,1,23,6290,NULL,NULL,'2022-07-22',6),(182,2,1,23,6291,NULL,NULL,'2022-07-22',6),(183,2,1,23,6292,NULL,NULL,'2022-07-22',6),(184,2,1,23,6293,NULL,NULL,'2022-07-22',6),(185,2,1,23,6294,NULL,NULL,'2022-07-22',6),(186,2,1,23,6295,NULL,NULL,'2022-07-22',6),(187,2,1,23,6296,NULL,NULL,'2022-07-22',6),(188,2,1,23,6297,NULL,NULL,'2022-07-22',6),(189,2,1,23,6298,NULL,NULL,'2022-07-22',6),(190,2,1,23,6299,NULL,NULL,'2022-07-22',6),(191,2,1,23,6300,NULL,NULL,'2022-07-22',6),(192,2,1,23,6301,NULL,NULL,'2022-07-22',6),(193,2,1,23,6302,NULL,NULL,'2022-07-22',6),(194,2,1,23,6303,NULL,NULL,'2022-07-22',6),(195,2,1,23,6304,NULL,NULL,'2022-07-22',6),(196,2,1,23,6305,NULL,NULL,'2022-07-22',6),(197,2,1,23,6306,NULL,NULL,'2022-07-22',6),(198,2,1,23,6307,NULL,NULL,'2022-07-22',6),(199,2,1,23,6308,NULL,NULL,'2022-07-22',6),(200,2,1,23,6309,NULL,NULL,'2022-07-22',6),(201,2,1,23,6310,NULL,NULL,'2022-07-22',6),(202,2,1,23,6311,NULL,NULL,'2022-07-22',6),(203,2,1,23,6312,NULL,NULL,'2022-07-22',6),(204,2,1,23,6313,NULL,NULL,'2022-07-22',6),(205,2,1,23,6314,NULL,NULL,'2022-07-22',6);
 /*!40000 ALTER TABLE `conciliacionbancaria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,7 +225,7 @@ CREATE TABLE `cuentabancaria` (
 
 LOCK TABLES `cuentabancaria` WRITE;
 /*!40000 ALTER TABLE `cuentabancaria` DISABLE KEYS */;
-INSERT INTO `cuentabancaria` VALUES (1,2,1,1,'1-9','1234','92210931',1),(2,3,2,1,'11-1','$2a$10$qONPDocIfqp4rCGZs0zGQ.QCBh/NE03Jx30jF9eNVDI9JXStAD8XC','999999990',1),(3,1,3,1,'13-1','1234444','987654321-0',1);
+INSERT INTO `cuentabancaria` VALUES (1,2,1,1,'1-9','1234','0-000-0014119-4',1),(2,3,2,1,'11-1','$2a$10$qONPDocIfqp4rCGZs0zGQ.QCBh/NE03Jx30jF9eNVDI9JXStAD8XC','999999990',1),(3,1,3,1,'13-1','1234444','987654321-0',1);
 /*!40000 ALTER TABLE `cuentabancaria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,7 +282,7 @@ CREATE TABLE `librodiario` (
 
 LOCK TABLES `librodiario` WRITE;
 /*!40000 ALTER TABLE `librodiario` DISABLE KEYS */;
-INSERT INTO `librodiario` VALUES (1,1,'1','2022-03-16','2022-05-16',1,1,1,NULL),(2,1,'Peso Chileno','2022-07-21',NULL,9,NULL,0,NULL),(3,1,'Peso Chileno','2022-07-21',NULL,9,NULL,0,NULL),(4,1,'Peso Chileno','2022-07-21',NULL,9,NULL,0,NULL),(5,1,'Peso Chileno','2022-07-21',NULL,9,NULL,0,NULL),(6,1,'Peso Chileno','2022-07-21',NULL,9,NULL,0,NULL),(7,1,'Peso Chileno','2022-07-21',NULL,9,NULL,0,NULL),(8,1,'Peso Chileno','2022-07-21','2022-07-22',9,NULL,0,NULL);
+INSERT INTO `librodiario` VALUES (1,1,'1','2022-03-16','2022-05-16',1,1,1,NULL),(8,1,'Peso Chileno','2022-07-21','2022-07-22',9,NULL,0,NULL);
 /*!40000 ALTER TABLE `librodiario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -305,7 +305,7 @@ CREATE TABLE `movimientolibrodiario` (
   PRIMARY KEY (`Id`),
   KEY `movimientolibrodiario_ibfk_1` (`Id_LibroDiario`),
   CONSTRAINT `movimientolibrodiario_ibfk_1` FOREIGN KEY (`Id_LibroDiario`) REFERENCES `librodiario` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -314,7 +314,7 @@ CREATE TABLE `movimientolibrodiario` (
 
 LOCK TABLES `movimientolibrodiario` WRITE;
 /*!40000 ALTER TABLE `movimientolibrodiario` DISABLE KEYS */;
-INSERT INTO `movimientolibrodiario` VALUES (1,1,1,'1','2022-05-16',1,'1','C'),(2,1,2,'1','2022-05-16',2,'1','C'),(3,8,-4740000,'2689142 CHEQUE DEVUELTO NUMERO','2022-07-22',0,'OPER. CENTRALES','C'),(4,8,-3471744,'Pago de Provee','2022-07-22',191421721,'OPER. CENTRALES','C'),(5,8,92368904,'Depósito con Vales Vista','2022-07-22',0,'Encomender','A'),(6,8,87330506,'0965696008 P.PROVEEDOR CAMERON','2022-07-22',0,'G.Finanzas','A'),(7,8,84250786,'0965670408 P.PROVEEDOR CIA MIN','2022-07-22',0,'G.Finanzas','A'),(8,8,67386752,'091755000K P.PROVEEDOR CEMENTO','2022-07-22',0,'G.Finanzas','A'),(9,8,63183367,'Depósito con Vales Vista','2022-07-22',0,'Encomender','A'),(10,8,62832000,'0760099260 P.PROVEEDOR MINETEC','2022-07-22',0,'G.Finanzas','A'),(11,8,58139471,'0765363535 P.PROVEEDOR Enel Ch','2022-07-22',0,'G.Finanzas','A');
+INSERT INTO `movimientolibrodiario` VALUES (1,1,1,'1','2022-05-16',1,'1','C'),(2,1,2,'1','2022-05-16',2,'1','C'),(111,8,-4740000,'2689142 CHEQUE DEVUELTO NUMERO','2022-07-22',0,'OPER. CENTRALES','C'),(112,8,-3471744,'Pago de Provee','2022-07-22',191421721,'OPER. CENTRALES','C'),(113,8,92368904,'Depósito con Vales Vista','2022-07-22',0,'Encomender','A'),(114,8,87330506,'0965696008 P.PROVEEDOR CAMERON','2022-07-22',0,'G.Finanzas','A'),(115,8,84250786,'0965670408 P.PROVEEDOR CIA MIN','2022-07-22',0,'G.Finanzas','A'),(116,8,67386752,'091755000K P.PROVEEDOR CEMENTO','2022-07-22',0,'G.Finanzas','A'),(117,8,63183367,'Depósito con Vales Vista','2022-07-22',0,'Encomender','A'),(118,8,62832000,'0760099260 P.PROVEEDOR MINETEC','2022-07-22',0,'G.Finanzas','A'),(119,8,58139471,'0765363535 P.PROVEEDOR Enel Ch','2022-07-22',0,'G.Finanzas','A');
 /*!40000 ALTER TABLE `movimientolibrodiario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1932,22 +1932,29 @@ BEGIN
 			SET vCampo3 = str_to_date(JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].FechaHasta'))),'%d-%m-%Y');
 			
 			select ID into vId_LibroDiario from `bankcolition`.`librodiario` WHERE `Id_CuentaBancaria` = pId_CuentaBancaria AND `FechaDesde` = vCampo2 and `FechaHasta` = vCampo3;	
-                
+            
+            # insert Cabecera
 			IF vId_LibroDiario is null or vId_LibroDiario < 1 Then    
                 INSERT INTO `bankcolition`.`librodiario`
 					(`Id_CuentaBancaria`,`Moneda`,`FechaDesde`,`FechaHasta`,`TotalMovimientos`,`Saldo`,`Cuadratura`,`Archivo`)
 					VALUES (pId_CuentaBancaria, 'Peso Chileno', vCampo2, vCampo3, vItems, null, False, null);
-				select ID into vId_LibroDiario from librodiario where Id_CuentaBancaria = pId_CuentaBancaria and FechaDesde = vCampo2 and FechaHasta = vCampo3;	
+				select max(ID) into vId_LibroDiario from `bankcolition`.`librodiario` where Id_CuentaBancaria = pId_CuentaBancaria and FechaDesde = vCampo2 and FechaHasta = vCampo3;	
+                
+				#Select 'LibroDiario(I)' as Tabla, max(ID) as Id_LibroDiario, count(*) as Registros from `bankcolition`.`librodiario` where ID = vId_LibroDiario;
 			ELSE
-				UPDATE `bankcolition`.`cartola`
+				UPDATE `bankcolition`.`librodiario`
 					SET
 					`TotalMovimientos` = vItems,
 					`Cuadratura` = False
 					WHERE `Id` = vId_LibroDiario;
+				
+				#Select 'LibroDiario(U)' as Tabla, max(ID) as Id_LibroDiario, count(*) as Registros from `bankcolition`.`librodiario` where ID = vId_LibroDiario;
 			END IF;
             
+            # delete movimientos antiguos Libro diario
 			DELETE FROM `movimientolibrodiario` where Id_LibroDiario = vId_LibroDiario;
-            
+
+            # insert Movimeintos Libro diario
             WHILE vIndex < vItems DO
 				
 				SET vCampo4 = REPLACE(JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Monto'))),'.','');
@@ -1963,10 +1970,121 @@ BEGIN
 							
 				SET vIndex = vIndex + 1;                    
             END WHILE;
-            
+			#Select 'MovimientoLibroDiario(I)' as Tabla, max(Id_LibroDiario) as Id_LibroDiario, count(*) as Registros from `bankcolition`.`movimientolibrodiario` where Id_LibroDiario = vId_LibroDiario;
+			COMMIT;
+
+
+			#Select "Inicio Conciliacion", pId_Cliente as Id_Cliente, vId_LibroDiario as Id_LibroDiario, vCampo2 as FechaDesde, vCampo3 as FechaHasta;
+            CALL `bankcolition`.`sp_RealizarConciliacion`(pId_Cliente, vId_LibroDiario, vCampo2, vCampo3);
+			#Select "Fin Conciliacion";
+
         END IF;
     END IF;
-    COMMIT;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_jsonLibroDiario_v2` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_jsonLibroDiario_v2`(
+	in pId_Cliente int,
+    in pId_CuentaBancaria int,
+    IN pParametroJson    JSON
+)
+BEGIN 
+    DECLARE vJsonEsValido INT;
+    DECLARE vItems INT;
+    DECLARE vIndex BIGINT UNSIGNED DEFAULT 0;
+    DECLARE vId_LibroDiario INT;
+    
+    # Variables para parseo del objeto JSON
+	DECLARE vCampo1 varchar(45);
+	DECLARE vCampo2 date;
+	DECLARE vCampo3 date;
+	DECLARE vCampo4 bigint;
+	DECLARE vCampo5 varchar(45);
+	DECLARE vCampo6 date;
+	DECLARE vCampo7 bigint;
+	DECLARE vCampo8 varchar(45);
+	DECLARE vCampo9 varchar(45);
+
+    
+    SET vJsonEsValido = JSON_VALID(pParametroJson);
+    
+    IF vJsonEsValido = 0 THEN 
+        # El objeto JSON no es válido, salimos prematuramente
+        SELECT "JSON suministrado no es válido";
+    ELSE 
+        # Nuestro objeto es válido, podemos proceder
+        SET vItems = JSON_LENGTH(pParametroJson);
+        
+        Select vItems, pParametroJson;
+        
+        # El objeto es válido y contiene al menos un elemento
+        IF vItems > 0 THEN 
+			SET vCampo1 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].CuentaCorriente')));
+			SET vCampo2 = str_to_date(JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].FechaDesde'))),'%d-%m-%Y');
+			SET vCampo3 = str_to_date(JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].FechaHasta'))),'%d-%m-%Y');
+			
+			select ID into vId_LibroDiario from `bankcolition`.`librodiario` WHERE `Id_CuentaBancaria` = pId_CuentaBancaria AND `FechaDesde` = vCampo2 and `FechaHasta` = vCampo3;	
+            
+            # insert Cabecera
+			IF vId_LibroDiario is null or vId_LibroDiario < 1 Then    
+                INSERT INTO `bankcolition`.`librodiario`
+					(`Id_CuentaBancaria`,`Moneda`,`FechaDesde`,`FechaHasta`,`TotalMovimientos`,`Saldo`,`Cuadratura`,`Archivo`)
+					VALUES (pId_CuentaBancaria, 'Peso Chileno', vCampo2, vCampo3, vItems, null, False, null);
+				select max(ID) into vId_LibroDiario from `bankcolition`.`librodiario` where Id_CuentaBancaria = pId_CuentaBancaria and FechaDesde = vCampo2 and FechaHasta = vCampo3;	
+                
+				Select 'LibroDiario(I)' as Tabla, max(ID) as Id_LibroDiario, count(*) as Registros from `bankcolition`.`librodiario` where ID = vId_LibroDiario;
+			ELSE
+				UPDATE `bankcolition`.`librodiario`
+					SET
+					`TotalMovimientos` = vItems,
+					`Cuadratura` = False
+					WHERE `Id` = vId_LibroDiario;
+				
+				Select 'LibroDiario(U)' as Tabla, max(ID) as Id_LibroDiario, count(*) as Registros from `bankcolition`.`librodiario` where ID = vId_LibroDiario;
+			END IF;
+            
+            # delete movimientos antiguos Libro diario
+			DELETE FROM `movimientolibrodiario` where Id_LibroDiario = vId_LibroDiario;
+
+            # insert Movimeintos Libro diario
+            WHILE vIndex < vItems DO
+				
+				SET vCampo4 = REPLACE(JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Monto'))),'.','');
+				SET vCampo5 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Descripcion')));
+				SET vCampo6 = str_to_date(JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Fecha'))),'%d-%m-%Y');
+				SET vCampo7 = REPLACE(JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].NoDocumento'))),'.','');
+				SET vCampo8 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Sucursal')));
+				SET vCampo9 = JSON_UNQUOTE(JSON_EXTRACT(pParametroJson, CONCAT('$[', vIndex, '].Cargo')));
+
+				INSERT INTO `bankcolition`.`movimientolibrodiario`
+					(`Id_LibroDiario`,`Monto`,`Descripcion`,`FechaMovimiento`,`NumeroDocumento`,`Sucursal`,`CargoAbono`)
+					VALUES (vId_LibroDiario, vCampo4, vCampo5, vCampo6, vCampo7, vCampo8, vCampo9);					
+							
+				SET vIndex = vIndex + 1;                    
+            END WHILE;
+			Select 'MovimientoLibroDiario(I)' as Tabla, max(Id_LibroDiario) as Id_LibroDiario, count(*) as Registros from `bankcolition`.`movimientolibrodiario` where Id_LibroDiario = vId_LibroDiario;
+			COMMIT;
+
+
+			Select "Inicio Conciliacion", pId_Cliente as Id_Cliente, vId_LibroDiario as Id_LibroDiario, vCampo2 as FechaDesde, vCampo3 as FechaHasta;
+            #CALL `bankcolition`.`sp_RealizarConciliacion`(pId_Cliente, vId_LibroDiario, vCampo2, vCampo3);
+			Select "Fin Conciliacion";
+
+        END IF;
+    END IF;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -2163,11 +2281,13 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_MostrarConciliacion`(
 	IN `arg_Cliente_Id` int	,
-    IN `arg_FechaDesde` varchar(10),
-    IN `arg_FechaHasta` varchar(10)
+    IN `arg_Id_CuentaBancaria` int
+    #,IN `arg_FechaDesde` varchar(10)
+    #,IN `arg_FechaHasta` varchar(10)
 )
 BEGIN
-
+	
+    drop TABLE IF EXISTS tmp_Show;
 	# Buscar Cartolas
     CREATE TEMPORARY TABLE IF NOT EXISTS tmp_Show AS (
 		Select 
@@ -2197,8 +2317,8 @@ BEGIN
 		left join bankcolition.cuentabancaria cb on
 			bc.Id_CuentaBancaria = cb.Id
 		where 
-			bc.Id_Cliente = `arg_Cliente_Id` 
-		and bc.FechaMovimiento between date(`arg_FechaDesde`) and date(`arg_FechaHasta`)
+			bc.Id_Cliente = `arg_Cliente_Id` and bc.Id_CuentaBancaria = `arg_Id_CuentaBancaria`
+			#and bc.FechaMovimiento between date(`arg_FechaDesde`) and date(`arg_FechaHasta`)
 		group by 			
 			bc.Id_Cliente,
             bc.Id_CuentaBancaria,
@@ -2225,14 +2345,14 @@ BEGIN
 			estado
         from tmp_Show;
         
-
+		
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_RealizaConciliacion` */;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_RealizarConciliacion` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -2242,12 +2362,17 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_RealizaConciliacion`(
-	IN `arg_Cliente_Id` int	,
-    IN `arg_FechaDesde` varchar(10),
-    IN `arg_FechaHasta` varchar(10)
+CREATE DEFINER=`bankcolition`@`%` PROCEDURE `sp_RealizarConciliacion`(
+	IN `arg_Id_Cliente` int	,
+    IN `arg_Id_LibroDiario` int,
+    IN `arg_FechaDesde` datetime,
+    IN `arg_FechaHasta` datetime
 )
 BEGIN
+	
+    Drop table IF EXISTS tmp_Union;
+	Drop table IF EXISTS tmp_Bank_Colition;
+	Drop table IF EXISTS Temp_ID;
 
 	# Buscar Cartolas
     CREATE TEMPORARY TABLE IF NOT EXISTS tmp_Union AS (
@@ -2270,8 +2395,8 @@ BEGIN
 		inner join bankcolition.movimientoscartola mc on
 			c.Id = mc.Id_Cartola
 		where 
-			cb.Id_Cliente = `arg_Cliente_Id` 
-		and mc.FechaMovimiento between date(`arg_FechaDesde`) and date(`arg_FechaHasta`)
+			cb.Id_Cliente = `arg_Id_Cliente` 
+		and mc.FechaMovimiento between `arg_FechaDesde` and `arg_FechaHasta`
 	) CartolasBancarias
     LEFT OUTER JOIN (
 		Select 
@@ -2290,8 +2415,8 @@ BEGIN
 		inner join bankcolition.movimientolibrodiario mc on
 			rc.Id = mc.Id_LibroDiario
 		where 
-			cb.Id_Cliente = `arg_Cliente_Id` 
-		and mc.FechaMovimiento between date(`arg_FechaDesde`) and date(`arg_FechaHasta`)
+			cb.Id_Cliente = `arg_Id_Cliente` and mc.Id_LibroDiario = `arg_Id_LibroDiario`
+		and mc.FechaMovimiento between `arg_FechaDesde` and `arg_FechaHasta`
 	) LibroDiario on
 			CartolasBancarias.CB_Id_Cliente = LibroDiario.LD_Id_Cliente
 		and CartolasBancarias.CB_Id_CuentaBancaria = LibroDiario.LD_Id_CuentaBancaria
@@ -2319,8 +2444,8 @@ BEGIN
 		inner join bankcolition.movimientoscartola mc on
 			c.Id = mc.Id_Cartola
 		where 
-			cb.Id_Cliente = `arg_Cliente_Id` 
-		and mc.FechaMovimiento between date(`arg_FechaDesde`) and date(`arg_FechaHasta`)
+			cb.Id_Cliente = `arg_Id_Cliente` 
+		and mc.FechaMovimiento between `arg_FechaDesde` and `arg_FechaHasta`
 	) CartolasBancarias
     RIGHT OUTER JOIN (
 		Select 
@@ -2339,8 +2464,8 @@ BEGIN
 		inner join bankcolition.movimientolibrodiario mc on
 			rc.Id = mc.Id_LibroDiario
 		where 
-			cb.Id_Cliente = `arg_Cliente_Id` 
-		and mc.FechaMovimiento between date(`arg_FechaDesde`) and date(`arg_FechaHasta`)
+			cb.Id_Cliente = `arg_Id_Cliente` and mc.Id_LibroDiario = `arg_Id_LibroDiario`
+		and mc.FechaMovimiento between `arg_FechaDesde` and `arg_FechaHasta`
 	) LibroDiario on
 			CartolasBancarias.CB_Id_Cliente = LibroDiario.LD_Id_Cliente
 		and CartolasBancarias.CB_Id_CuentaBancaria = LibroDiario.LD_Id_CuentaBancaria
@@ -2368,11 +2493,31 @@ BEGIN
 				ELSE 4
 			END as Id_Estado
 		from tmp_Union tu);    
-
-	Select * from tmp_Bank_Colition tbc;
     
+	#Select * from tmp_Bank_Colition tbc;
+    
+    CREATE TEMPORARY TABLE Temp_ID (id INT);
+	insert INTO Temp_ID
+		select distinct ID as id from `bankcolition`.`conciliacionbancaria` CB
+			Left join tmp_Bank_Colition TMP ON 
+					CB.Id_Cliente = TMP.Id_Cliente
+				and CB.Id_CuentaBancaria = TMP.Id_CuentaBancaria
+				and CB.FechaMovimiento = TMP.FechaMovimiento
+				and (CB.Id_Cartola = TMP.Id_Cartola or TMP.Id_Cartola = null)
+				and (CB.Id_MovimientoCartola = TMP.Id_MovimientoCartola or TMP.Id_MovimientoCartola = null)
+				and (CB.Id_LibroDiario = TMP.Id_LibroDiario or TMP.Id_LibroDiario= null)
+				and (CB.Id_MovimientoLibroDiario = TMP.Id_MovimientoLibroDiario or TMP.Id_MovimientoLibroDiario = null);    
+	
+	delete from `bankcolition`.`conciliacionbancaria` where ID in(select id from Temp_ID);
+    
+    #select 'insert Conciliacion';
     INSERT INTO `bankcolition`.`conciliacionbancaria` (Id_Cliente, Id_CuentaBancaria, Id_Cartola, Id_MovimientoCartola, Id_LibroDiario, Id_MovimientoLibroDiario,FechaMovimiento, Id_Estado)
 		Select * from tmp_Bank_Colition tbc;
+	#select 'fin conciliacion';
+    
+	Drop table IF EXISTS tmp_Union;
+	Drop table IF EXISTS tmp_Bank_Colition;
+	Drop table IF EXISTS Temp_ID;
 
 END ;;
 DELIMITER ;
@@ -3536,4 +3681,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-26  4:04:15
+-- Dump completed on 2022-07-26 23:47:36
